@@ -1,0 +1,9 @@
+node_modules/
+.env*
+!.env.example
+.playwright-mcp/
+*.log
+.DS_Store
+# screenshots (large, local QA evidence only)
+.team/shots/
+.team/handoffs/*.png

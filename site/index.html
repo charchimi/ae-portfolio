@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียง | โรงเรียนมัธยมวัดด่านสำโรง</title>
+<meta name="description" content="โครงงานฟิสิกส์ โรงเรียนมัธยมวัดด่านสำโรง — เครื่องฟังคลื่นเสียงจากรอยร้าว ระบุตำแหน่งด้วย TDOA และแสดงผลสามมิติบนเว็บ สร้างด้วยงบต่ำกว่า 2,000 บาท คลาดเคลื่อนเฉลี่ย 1.33 ซม.">
+<meta name="theme-color" content="#04070a">
+<link rel="canonical" href="https://charchimi.github.io/ae-portfolio/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="icon" href="assets/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Real-time Acoustic Emission Source Localization">
+<meta property="og:title" content="ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติแบบเรียลไทม์">
+<meta property="og:description" content="เครื่องฟังคลื่นเสียงจากรอยร้าว ระบุตำแหน่งด้วย TDOA สร้างด้วยงบต่ำกว่า 2,000 บาท คลาดเคลื่อนเฉลี่ย 1.33 ซม.">
+<meta property="og:url" content="https://charchimi.github.io/ae-portfolio/">
+<meta property="og:image" content="https://charchimi.github.io/ae-portfolio/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="โครงงานฟิสิกส์ โรงเรียนมัธยมวัดด่านสำโรง: ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติแบบเรียลไทม์">
+<meta name="twitter:description" content="เครื่องฟังคลื่นเสียงจากรอยร้าว ระบุตำแหน่งด้วย TDOA สร้างด้วยงบต่ำกว่า 2,000 บาท คลาดเคลื่อนเฉลี่ย 1.33 ซม.">
+<meta name="twitter:image" content="https://charchimi.github.io/ae-portfolio/assets/og.png">
+<meta name="twitter:image:alt" content="โครงงานฟิสิกส์ โรงเรียนมัธยมวัดด่านสำโรง: ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติ">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200..600&family=Geist+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');
+var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var seen=false;try{seen=sessionStorage.getItem('ae-boot')==='1';sessionStorage.setItem('ae-boot','1');}catch(e){}
+if(rm||seen){d.classList.add('no-boot','is-ready');}else{setTimeout(function(){d.classList.add('is-ready');},1250);}})();
+</script>
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js",
+  "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.min.js"
+}}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "name": "ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติแบบเรียลไทม์",
+  "alternateName": "Real-time Acoustic Emission Source Localization System with 3D Visualization",
+  "description": "โครงงานฟิสิกส์ โรงเรียนมัธยมวัดด่านสำโรง — เครื่องฟังคลื่นเสียงจากรอยร้าว ระบุตำแหน่งด้วย TDOA และแสดงผลสามมิติบนเว็บ",
+  "inLanguage": "th",
+  "datePublished": "2026-09-30",
+  "dateModified": "2026-09-30",
+  "url": "https://charchimi.github.io/ae-portfolio/",
+  "image": "https://charchimi.github.io/ae-portfolio/assets/og.png",
+  "genre": "โครงงานวิทยาศาสตร์ ประเภทฟิสิกส์",
+  "keywords": "Acoustic Emission, TDOA, STM32, เซนเซอร์เพียโซ, การระบุตำแหน่ง, โครงงานฟิสิกส์",
+  "author": [
+    {"@type": "Person", "name": "นายภูริวัจน์เจริญ เจริญบันลือโชติ"},
+    {"@type": "Person", "name": "นายไอยคุปต์ ปิยะไทยเสรี"},
+    {"@type": "Person", "name": "นางสาววรรณกานต์ วัฒโนภาษ"}
+  ],
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "โรงเรียนมัธยมวัดด่านสำโรง",
+    "parentOrganization": {"@type": "Organization", "name": "สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาสมุทรปราการ"}
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปยังเนื้อหา</a>
+
+<!-- boot / preloader (once per session, ≤1.3s, click or any key to skip) -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-in">
+    <svg class="boot-trace" viewBox="0 0 600 120" preserveAspectRatio="none">
+      <path class="bt-base" d="M0 60H600"/>
+      <path class="bt-sig" d="M0 60H212l6-3 5 7 5-14 6 26 6-40 7 52 6-58 7 50 6-38 6 26 6-18 6 12 6-8 6 5 6-3 5 2H600"/>
+    </svg>
+    <p class="boot-l"><span>SYSTEM ONLINE</span><span>4 CH</span><span>38,462 S/s</span></p>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor is-hidden" aria-hidden="true"><span class="cursor-ring"></span><span class="cursor-dot"></span></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-t">AE Localization</span></a>
+    <p class="nav-now" aria-hidden="true"><span class="nav-now-no" id="navNo">00</span><span class="nav-now-t" id="navT">หน้าแรก</span></p>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="menu"><span class="nt-l">เมนู</span><span class="nt-i" aria-hidden="true"><i></i><i></i></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu-bg" aria-hidden="true"></div>
+  <nav aria-label="เมนูหลัก" class="menu-in">
+    <div class="menu-l">
+      <ol class="menu-list" id="navList">
+      <li><a href="#background"><span class="m-no">01</span><span class="m-t">ที่มา</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#objectives"><span class="m-no">02</span><span class="m-t">วัตถุประสงค์</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#hypothesis"><span class="m-no">03</span><span class="m-t">สมมติฐาน</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#how"><span class="m-no">04</span><span class="m-t">คำสำคัญ</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#demo"><span class="m-no"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l7 4-7 4z"/></svg></span><span class="m-t">เดโม่</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#system"><span class="m-no">05</span><span class="m-t">ระบบ</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#results"><span class="m-no">06</span><span class="m-t">ผลการทดลอง</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#decision"><span class="m-no">07</span><span class="m-t">ค่าชดเชย</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#conclusion"><span class="m-no">08</span><span class="m-t">สรุป</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#gallery"><span class="m-no">09</span><span class="m-t">แกลเลอรี</span><span class="m-go" aria-hidden="true"></span></a></li>
+      <li><a href="#team"><span class="m-no">10</span><span class="m-t">ผู้จัดทำ</span><span class="m-go" aria-hidden="true"></span></a></li>
+      </ol>
+      <p class="menu-foot">โครงงานวิทยาศาสตร์ ประเภทฟิสิกส์ · โรงเรียนมัธยมวัดด่านสำโรง · ปีการศึกษา 2569</p>
+    </div>
+    <aside class="menu-prev" id="menuPrev" aria-hidden="true"></aside>
+  </nav>
+</div>
+
+<nav class="rail" aria-label="ความคืบหน้าของหน้า">
+  <ol>
+    <li><a href="#background" data-label="ที่มา"><span>01</span></a></li>
+    <li><a href="#objectives" data-label="วัตถุประสงค์"><span>02</span></a></li>
+    <li><a href="#hypothesis" data-label="สมมติฐาน"><span>03</span></a></li>
+    <li><a href="#how" data-label="คำสำคัญ"><span>04</span></a></li>
+    <li><a href="#system" data-label="ระบบ"><span>05</span></a></li>
+    <li><a href="#results" data-label="ผลการทดลอง"><span>06</span></a></li>
+    <li><a href="#decision" data-label="ค่าชดเชย"><span>07</span></a></li>
+    <li><a href="#conclusion" data-label="สรุป"><span>08</span></a></li>
+    <li><a href="#gallery" data-label="แกลเลอรี"><span>09</span></a></li>
+    <li><a href="#team" data-label="ผู้จัดทำ"><span>10</span></a></li>
+  </ol>
+  <span class="rail-bar" aria-hidden="true"><i id="progress"></i></span>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="h-title">
+  <div class="hero-aura" aria-hidden="true"></div>
+  <div class="hero-stage" id="heroStage" aria-hidden="true">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hud">
+      <span class="hud-c hud-tl"></span><span class="hud-c hud-tr"></span><span class="hud-c hud-bl"></span><span class="hud-c hud-br"></span>
+      <p class="hud-tag"><span class="hud-dot"></span>ภาพจำลอง 3 มิติ · แผ่นอะคริลิก 40 × 40 ซม.</p>
+      <p class="hud-read" id="hudRead"><span>event</span><b id="hudEv">--</b><span>x,y</span><b id="hudXY">--</b><span>ระดับ</span><b id="hudLv">--</b></p>
+    </div>
+  </div>
+  <div class="wrap hero-in">
+    <p class="hero-eyebrow"><span class="pulse" aria-hidden="true"></span>Science Project · ฟิสิกส์ · โรงเรียนมัธยมวัดด่านสำโรง · ปีการศึกษา 2569</p>
+    <h1 id="h-title">
+      <span class="h-en" lang="en"><span class="ln"><span>Real-time Acoustic</span></span> <span class="ln"><span>Emission Source</span></span> <span class="ln"><span>Localization System</span></span> <span class="ln"><span>with 3D Visualization</span></span></span>
+      <span class="h-th"><span class="ln"><span>ระบบระบุตำแหน่งแหล่งกำเนิดคลื่นเสียงในวัสดุ พร้อมแสดงผลสามมิติแบบเรียลไทม์</span></span></span>
+    </h1>
+    <p class="hero-lead">เราไม่ยิงคลื่นเข้าไปในวัสดุ แต่แค่ &ldquo;ฟัง&rdquo; คลื่นที่วัสดุปล่อยออกมาเองตอนที่มันร้าว</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#demo" data-magnetic><span>ลองเดโม่ TDOA</span></a>
+      <a class="btn btn-ghost" href="#results" data-magnetic><span>ดูผลการทดลอง</span></a>
+    </div>
+  </div>
+  <div class="wrap hero-stats-wrap">
+    <dl class="stats">
+      <div class="stat"><dt>ต้นทุนอุปกรณ์</dt><dd><span class="pre">&lt;</span><span class="num" data-to="2000">2,000</span><span class="u">บาท</span></dd></div>
+      <div class="stat"><dt>ความคลาดเคลื่อนเฉลี่ย <span class="sub">(สูงสุด 3.00 ซม.)</span></dt><dd><span class="num" data-to="1.33" data-dec="2">1.33</span><span class="u">ซม.</span></dd></div>
+      <div class="stat"><dt>อยู่ในเกณฑ์ ±3 ซม.</dt><dd><span class="num" data-to="100">100</span><span class="u">%</span></dd></div>
+      <div class="stat"><dt>ความหน่วงการแสดงผล</dt><dd><span class="pre">&le;</span><span class="num" data-to="200">200</span><span class="u">ms</span></dd></div>
+      <div class="stat"><dt>เซนเซอร์เพียโซ</dt><dd><span class="num" data-to="4">4</span></dd></div>
+    </dl>
+  </div>
+  <a class="scroll-cue" href="#background"><span class="sr-only">เลื่อนลงไปยังที่มา</span><i aria-hidden="true"></i></a>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <p><span>38,462 ตัวอย่าง/วินาที/ช่อง</span><span>675 m/s</span><span>12 บิต</span><span>19,231 Hz</span><span>2,048 รอบ/เหตุการณ์</span><span>≤ 200 ms</span><span>4 × เพียโซ</span><span>STM32F411CEU6</span><span>&lt; 2,000 บาท</span><span>±3 ซม.</span></p>
+    <p><span>38,462 ตัวอย่าง/วินาที/ช่อง</span><span>675 m/s</span><span>12 บิต</span><span>19,231 Hz</span><span>2,048 รอบ/เหตุการณ์</span><span>≤ 200 ms</span><span>4 × เพียโซ</span><span>STM32F411CEU6</span><span>&lt; 2,000 บาท</span><span>±3 ซม.</span></p>
+  </div>
+</div>
+
+<!-- 01 BACKGROUND -->
+<section id="background" class="chapter" aria-labelledby="h-bg" data-chapter="01" data-title="ที่มา">
+  <div class="wrap">
+    <div class="bg-head">
+      <header class="chap">
+        <span class="chap-no" aria-hidden="true">01</span>
+        <p class="chap-en" lang="en">Background and Significance</p>
+        <h2 id="h-bg" data-split>ที่มาและความสำคัญ</h2>
+      </header>
+      <div class="bg-body">
+        <p class="lede" data-reveal>อาคาร สะพาน และท่อส่งของเหลวเสื่อมสภาพตลอดเวลา แต่ไม่พังทันที มันเริ่มจากรอยร้าวเล็กระดับไมโครเมตรที่มองไม่เห็นด้วยตาเปล่า แล้วค่อย ๆ ขยายจนโครงสร้างวิบัติ ปัญหาคือวิธีตรวจที่ใช้กันอยู่ยังมีข้อจำกัด</p>
+        
+      </div>
+    </div>
+    <div class="bg-lens">
+        <div class="lens" data-lens data-mode="ae" data-reveal>
+          <figure class="lens-fig" aria-hidden="true">
+            <svg class="lens-svg" viewBox="0 0 400 400" focusable="false">
+              <defs>
+                <linearGradient id="lensScan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fd8e6" stop-opacity="0"/><stop offset="1" stop-color="#3fd8e6" stop-opacity=".45"/></linearGradient>
+                <clipPath id="lensClip"><rect x="40" y="40" width="320" height="320" rx="6"/></clipPath>
+              </defs>
+              <rect class="lp-plate" x="40" y="40" width="320" height="320" rx="6"/>
+              <path class="lp-grid" d="M120 40V360M200 40V360M280 40V360M40 120H360M40 200H360M40 280H360"/>
+              <path class="lp-crack" d="M150 242l11-13-6-11 15-9 8-13"/>
+              <g class="v-eye" clip-path="url(#lensClip)"><g class="scan-g"><rect x="40" y="-20" width="320" height="60" fill="url(#lensScan)"/><line x1="40" x2="360" y1="40" y2="40"/></g></g>
+              <g class="v-us"><g class="probe"><circle class="us-zone" r="42"/><circle class="us-ring" r="42"/><circle class="us-ring r2" r="42"/><path class="us-body" d="M0 0V-26M-8 -26H8"/><circle class="us-tip" r="3.5"/></g></g>
+              <g class="v-ae"><circle class="ae-ring" cx="165" cy="222" r="220"/><circle class="ae-ring r2" cx="165" cy="222" r="220"/><g class="sn s1" transform="translate(60 340)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s4" transform="translate(60 60)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s2" transform="translate(340 340)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s3" transform="translate(340 60)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g></g>
+            </svg>
+          </figure>
+          <div class="lens-ui">
+            <div class="lens-tabs" role="tablist" aria-label="วิธีตรวจสอบรอยร้าว">
+              <button type="button" role="tab" id="lt-eye" aria-controls="lp-eye" aria-selected="false" data-mode="eye"><span>ใช้สายตา</span></button>
+              <button type="button" role="tab" id="lt-us" aria-controls="lp-us" aria-selected="false" data-mode="us"><span>ยิงคลื่นเข้าไป</span></button>
+              <button type="button" role="tab" id="lt-ae" aria-controls="lp-ae" aria-selected="true" data-mode="ae"><span>ฟังเชิงรับ</span></button>
+            </div>
+            <div class="lens-panels">
+              <div role="tabpanel" id="lp-eye" aria-labelledby="lt-eye" data-mode="eye"><h3>ตรวจด้วยสายตา</h3><p>จะเห็นตอนรอยร้าวโตพอมองเห็นแล้ว ซึ่งสายเกินกว่าจะป้องกัน</p></div>
+              <div role="tabpanel" id="lp-us" aria-labelledby="lt-us" data-mode="us"><h3>อัลตราโซนิกหรือเอกซเรย์</h3><p>ละเอียดกว่า แต่ต้องหยุดใช้งานโครงสร้าง ต้องมีผู้เชี่ยวชาญ และตรวจได้ทีละจุด</p></div>
+              <div role="tabpanel" id="lp-ae" aria-labelledby="lt-ae" data-mode="ae"><h3>อะคูสติกอิมิชชัน (AE)</h3><p>เป็นวิธีเชิงรับ เราไม่ยิงคลื่นเข้าไปในวัสดุ แต่แค่ &ldquo;ฟัง&rdquo; คลื่นที่วัสดุปล่อยออกมาเองตอนที่มันร้าว จึงเฝ้าฟังได้ตลอดเวลาขณะโครงสร้างยังใช้งานอยู่ และจับเฉพาะรอยร้าวที่กำลังลุกลาม ซึ่งเป็นรอยที่มีความเสี่ยงจริง</p></div>
+            </div>
+          </div>
+        </div>
+        <p class="price"</ul>
+        <p class="price" data-reveal>แต่ระบบ AE ในตลาดราคาหลักแสนถึงหลักล้านบาท โรงเรียนและหน่วยงานท้องถิ่นเข้าไม่ถึง</p>
+      </div>
+    <div class="question" data-reveal>
+      <p class="question-k">คำถามของเรา</p>
+      <p class="question-t" data-split>หลักการเดียวกันนี้ สร้างเองด้วยของต่ำกว่า 2,000 บาทได้หรือไม่ และจะบอกตำแหน่งได้แม่นแค่ไหน</p>
+    </div>
+  </div>
+</section>
+
+<!-- photo band -->
+<figure class="band band-parallax" aria-labelledby="band1c">
+  <div class="band-media"><img src="assets/img/piezo-sensors-sm.webp" srcset="assets/img/piezo-sensors-sm.webp 800w, assets/img/piezo-sensors.webp 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="เซนเซอร์เพียโซอิเล็กทริกและตัวต้านทาน 10K โอห์ม"></div>
+  <figcaption id="band1c" class="band-cap"><span class="band-k">อุปกรณ์จริง</span>เซนเซอร์เพียโซอิเล็กทริกและตัวต้านทาน 10K โอห์ม</figcaption>
+</figure>
+
+<!-- 02 OBJECTIVES -->
+<section id="objectives" class="chapter" aria-labelledby="h-obj" data-chapter="02" data-title="วัตถุประสงค์">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">02</span>
+      <p class="chap-en" lang="en">Objectives</p>
+      <h2 id="h-obj" data-split>วัตถุประสงค์</h2>
+    </header>
+    <p class="intro" data-reveal>เราต้องการเครื่องที่ตรวจจับได้ บอกตำแหน่งได้ บอกความรุนแรงได้ และแสดงผลทันที จึงตั้งวัตถุประสงค์ไว้ 4 ข้อ</p>
+    <div class="obj" data-obj data-step="0">
+      <div class="obj-viz" aria-hidden="true">
+        <div class="deck deck--fan">
+        <div class="obj-viz-in">
+          <svg class="obj-svg" viewBox="0 0 400 400" focusable="false">
+            <g class="op">
+              <rect class="lp-plate" x="40" y="40" width="320" height="320" rx="6"/>
+              <path class="lp-grid" d="M120 40V360M200 40V360M280 40V360M40 120H360M40 200H360M40 280H360"/>
+              <g class="lk"><path d="M60 60L184 184M340 60L216 184M340 340L216 216M60 340L184 216"/></g>
+              <g class="hy"><path pathLength="1" d="M60 120C120 180 140 215 150 240S200 330 250 360"/><path pathLength="1" d="M40 300C100 285 130 255 150 240S230 190 360 170"/><path pathLength="1" d="M250 40C220 110 180 190 150 240S110 320 100 360"/></g>
+              <g class="chip"><rect x="184" y="184" width="32" height="32" rx="3"/><text x="200" y="204" text-anchor="middle">STM32</text></g>
+              <g class="sn s1" transform="translate(60 340)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s4" transform="translate(60 60)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s2" transform="translate(340 340)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g><g class="sn s3" transform="translate(340 60)"><circle class="glow" r="11"/><circle class="body" r="11"/><circle class="core" r="4"/></g>
+              <g class="src" transform="translate(150 240)"><circle class="lv3" r="44"/><circle class="lv2" r="31"/><circle class="lv1" r="19"/><circle class="dot" r="6"/></g>
+            </g>
+            <g class="bar3d" transform="translate(185 253)"><ellipse class="b-ring" rx="30" ry="14"/><g class="b-body"><ellipse class="b-base" rx="14" ry="6.5"/><rect x="-14" y="-78" width="28" height="78"/><ellipse class="b-top" cy="-78" rx="14" ry="6.5"/></g></g>
+          </svg>
+          <p class="obj-cap"><span id="objNo">1 / 4</span></p>
+        </div>
+        </div>
+      </div>
+      <ol class="obj-steps">
+        <li class="obj-step is-active" data-step="0"><span class="obj-n" aria-hidden="true">01</span><p><strong>สร้างต้นแบบตรวจจับคลื่นจากรอยร้าว</strong> ด้วยเซนเซอร์เพียโซ 4 ตัว ต่อกับ STM32F411CEU6</p></li>
+        <li class="obj-step" data-step="1"><span class="obj-n" aria-hidden="true">02</span><p><strong>หาตำแหน่งสองมิติด้วย TDOA</strong> โดยใช้เซนเซอร์ 4 ตัว ไม่ใช่ 3 ตัวที่พอดีกับสมการ จึงได้สมการเกินมาหนึ่งข้อไว้ตรวจว่าคำตอบน่าเชื่อถือแค่ไหน พูดง่าย ๆ คือระบบตรวจตัวเองได้</p></li>
+        <li class="obj-step" data-step="2"><span class="obj-n" aria-hidden="true">03</span><p><strong>จำแนกพลังงานเป็น 3 ระดับ</strong> คือ Minor, Warning และ Critical โดยเกณฑ์มาจากข้อมูลที่วัดได้จริง ไม่ใช่ตัวเลขที่ตั้งขึ้นลอย ๆ</p></li>
+        <li class="obj-step" data-step="3"><span class="obj-n" aria-hidden="true">04</span><p><strong>แสดงผลตำแหน่งแบบสามมิติผ่านเว็บแบบเรียลไทม์</strong> ซึ่งสามมิติเป็นวิธีแสดงผล ส่วนการระบุพิกัดเป็นสองมิติ</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 03 HYPOTHESIS -->
+<section id="hypothesis" class="chapter chapter-tint" aria-labelledby="h-hyp" data-chapter="03" data-title="สมมติฐาน">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">03</span>
+      <p class="chap-en" lang="en">Hypothesis</p>
+      <h2 id="h-hyp" data-split>สมมติฐาน</h2>
+    </header>
+    <p class="intro" data-reveal>เราตั้งไว้ว่าเครื่องที่ทำจากของราคาประหยัดจะบอกตำแหน่งและแยกระดับความรุนแรงได้จริง แยกเป็น 4 ข้อ</p>
+    <div class="hyp2" data-hyp data-reveal>
+      <div class="hyp2-side"><p class="hyp2-hint" id="hyp-hint">เลือกสมมติฐานเพื่อดูรายละเอียด</p><div class="hyp2-tabs" role="tablist" aria-describedby="hyp-hint" aria-label="สมมติฐาน 4 ข้อ" aria-orientation="vertical">
+        <button type="button" role="tab" id="ht-1" aria-controls="hp-1" aria-selected="true" class="is-risk"><span class="ht-id">H1</span><span class="ht-sub">เสี่ยงที่สุด</span><i class="ht-prog" aria-hidden="true"></i></button>
+        <button type="button" role="tab" id="ht-2" aria-controls="hp-2" aria-selected="false"><span class="ht-id">H2</span><span class="ht-sub">&le; 5 ซม.</span><i class="ht-prog" aria-hidden="true"></i></button>
+        <button type="button" role="tab" id="ht-3" aria-controls="hp-3" aria-selected="false"><span class="ht-id">H3</span><span class="ht-sub">3 ระดับ</span><i class="ht-prog" aria-hidden="true"></i></button>
+        <button type="button" role="tab" id="ht-4" aria-controls="hp-4" aria-selected="false"><span class="ht-id">H4</span><i class="ht-prog" aria-hidden="true"></i></button>
+      </div></div>
+      <div class="hyp2-stage">
+        <div role="tabpanel" id="hp-1" aria-labelledby="ht-1" class="hp hp-risk">
+          <p class="hp-claim">เพียโซราคาประหยัดให้สัญญาณแรงพอจะหาเวลามาถึงของคลื่นได้โดยไม่ต้องใช้วงจรขยาย ข้อนี้เสี่ยงที่สุด เพราะแนวทางทั่วไปคือต้องขยายก่อน</p>
+          <div class="gauge risk-meter" role="img" aria-label="ระดับความเสี่ยง: เสี่ยงที่สุด"><div class="rm-bar"><i></i><i></i><i></i><i></i><i></i></div><p class="rm-l">&#9650; เสี่ยงที่สุด</p></div>
+        </div>
+        <div role="tabpanel" id="hp-2" aria-labelledby="ht-2" class="hp">
+          <p class="hp-claim">ผลต่างเวลาที่คลื่นถึงเซนเซอร์แต่ละคู่ ใช้คำนวณตำแหน่งได้ คลาดเคลื่อนไม่เกิน 5 เซนติเมตร ในพื้นที่ที่เซนเซอร์ล้อมรอบ</p>
+          <div class="gauge arc-gauge" role="img" aria-label="เกณฑ์วัด: คลาดเคลื่อนไม่เกิน 5 ซม.">
+            <svg viewBox="0 0 220 130" focusable="false"><path class="ag-track" d="M20 115a90 90 0 0 1 180 0" pathLength="100"/><path class="ag-fill" d="M20 115a90 90 0 0 1 180 0" pathLength="100"/><text x="20" y="129" class="ag-t">0</text><text x="200" y="129" class="ag-t" text-anchor="end">5</text></svg>
+            <p class="ag-v"><span class="big">&le; 5</span> <small>ซม.</small></p>
+          </div>
+        </div>
+        <div role="tabpanel" id="hp-3" aria-labelledby="ht-3" class="hp">
+          <p class="hp-claim">แอมพลิจูดสัมพันธ์กับพลังงานที่ป้อนเข้า จึงใช้แบ่ง 3 ระดับได้ แต่เกณฑ์ต้องสอบเทียบกับเครื่องที่ประกอบแล้ว เพราะค่าขึ้นกับความไวเซนเซอร์และชนิดวัสดุ</p>
+          <div class="gauge lv-meter" role="img" aria-label="เกณฑ์วัด: 3 ระดับ"><div class="lm-bars"><i class="g"><b>1</b></i><i class="y"><b>2</b></i><i class="r"><b>3</b></i></div><p class="lm-v"><span class="big">3</span> <small>ระดับ</small></p></div>
+        </div>
+        <div role="tabpanel" id="hp-4" aria-labelledby="ht-4" class="hp">
+          <p class="hp-claim">ความคลาดเคลื่อนที่เหลือจะใกล้เคียงขีดจำกัดทางทฤษฎี ซึ่งคำนวณล่วงหน้าได้จากอัตราการสุ่มและความเร็วคลื่น ข้อนี้ทำให้เรารู้ตั้งแต่ต้นว่าเครื่องนี้แม่นที่สุดได้แค่ไหน</p>
+          <div class="gauge conv" role="img" aria-label="ความคลาดเคลื่อนที่เหลือใกล้เคียงขีดจำกัดทางทฤษฎี"><div class="cv-track"><i class="cv-limit"></i><i class="cv-dot"></i></div><p class="cv-l"><span>ความคลาดเคลื่อนที่เหลือ</span><span>ขีดจำกัดทางทฤษฎี</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 HOW IT WORKS (sticky scrollytelling) -->
+<section id="how" class="chapter how" aria-labelledby="h-how" data-chapter="04" data-title="คำสำคัญ">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">04</span>
+      <p class="chap-en" lang="en">How it works</p>
+      <h2 id="h-how" data-split>คำสำคัญ</h2>
+    </header>
+    <div class="how-grid">
+      <div class="how-viz" aria-hidden="true">
+        <div class="deck deck--flip">
+        <div class="how-viz-in">
+          <canvas id="howCanvas"></canvas>
+          <p class="how-viz-cap"><span id="howNo">1 / 6</span><span id="howName">Acoustic Emission</span></p>
+          <ol class="how-dots"><li class="is-on"></li><li></li><li></li><li></li><li></li><li></li></ol>
+        </div>
+        </div>
+      </div>
+      <ol class="how-steps">
+        <li class="how-step" data-step="0"><p class="how-k">ภาพที่ 1</p><h3>Acoustic Emission (AE)</h3><p>คลื่นความดันที่วัสดุปล่อยออกมาเองขณะร้าว ไม่ใช่คลื่นที่เรายิงเข้าไป</p></li>
+        <li class="how-step" data-step="1"><p class="how-k">ภาพที่ 2</p><h3>TDOA</h3><p>ผลต่างเวลาที่คลื่นถึงเซนเซอร์สองตัว มันแปรตรงกับผลต่างระยะทาง ซึ่งบังคับว่าแหล่งกำเนิดต้องอยู่บนเส้นไฮเพอร์โบลาเส้นหนึ่ง</p></li>
+        <li class="how-step" data-step="2"><p class="how-k">ภาพที่ 3</p><h3>การตรวจจับจุดเริ่มคลื่น</h3><p>เราไม่วัดที่ยอดคลื่น เพราะยอดคลื่นมาช้าและขึ้นกับความแรงสัญญาณ เราวัดที่จุดแรกที่สัญญาณเบนออกจากเส้นฐาน ใช้เกณฑ์ร้อยละ 3 ของยอดคลื่นของช่องนั้นเอง คิดเป็นสัดส่วน ช่องแรงกับช่องเบาจึงถูกวัดที่จุดเดียวกันบนรูปคลื่น</p></li>
+        <li class="how-step" data-step="3"><p class="how-k">ภาพที่ 4</p><h3>ระบบสมการเกินกำหนด</h3><p>3 สมการ ต่อ 2 ตัวแปร แก้ด้วยวิธีกำลังสองน้อยสุด</p></li>
+        <li class="how-step" data-step="4"><p class="how-k">ภาพที่ 5</p><h3>การตรวจแบบตัดออกทีละตัว (Leave-One-Out)</h3><p>ตัดเซนเซอร์ออกทีละตัวแล้วคำนวณใหม่ 4 รอบ ถ้าคำตอบเกาะกลุ่มกันแปลว่าเชื่อถือได้ ข้อดีคือใช้ได้ตอนสาธิตสดที่เราไม่รู้คำตอบล่วงหน้า</p></li>
+        <li class="how-step" data-step="5"><p class="how-k">ภาพที่ 6</p><h3>แหล่งกำเนิดสัญญาณ</h3><p>น็อตหย่อนผ่านท่อ พลังงานเท่ากับ mgh จึงคงที่ทุกครั้ง ใช้แทนวิธีหักไส้ดินสอตาม ASTM E976 ที่เราลองแล้วกระตุ้นระบบไม่ได้ทั้งบนไม้ MDF และอะคริลิก</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" class="chapter demo-sec" aria-labelledby="h-demo" data-chapter="··" data-title="เดโม่">
+  <div class="wrap">
+    <header class="chap chap-center">
+      <p class="chap-en" lang="en">Interactive · TDOA</p>
+      <h2 id="h-demo" data-split>เดโม่เชิงโต้ตอบ</h2>
+    </header>
+    <div class="demo instrument" data-reveal>
+      <div class="demo-stage">
+        <p class="badge"><span class="badge-dot" aria-hidden="true"></span>จำลองเพื่ออธิบายหลักการ — ไม่ใช่ข้อมูลจากเครื่องจริง</p>
+        <canvas id="demoCanvas" tabindex="0" role="application" data-cursor="target" aria-label="แผ่นจำลอง 30 คูณ 30 เซนติเมตร คลิกหรือแตะเพื่อวางแหล่งกำเนิดคลื่น หรือใช้ปุ่มลูกศรเลื่อนจุดแล้วกด Enter เพื่อปล่อยคลื่น" aria-describedby="demoHint"></canvas>
+        <p class="demo-hint mono" id="demoHint">คลิกหรือแตะบนแผ่น · ใช้ปุ่มลูกศรเลื่อนเป้า (Shift = 5 ซม.) แล้วกด Enter</p>
+      </div>
+      <div class="demo-side">
+        <div class="demo-controls">
+          <button class="btn btn-primary" type="button" id="demoRandom" data-magnetic><span>สุ่มจุด</span></button>
+          <button class="btn btn-ghost" type="button" id="demoReset" data-magnetic><span>ล้างค่า</span></button>
+        </div>
+        <p class="demo-formula mono">Δt = Δd ÷ v &nbsp;·&nbsp; v = 675 m/s</p>
+        <p class="demo-note">แผ่น 30 × 30 ซม. เซนเซอร์ S1 (0,0) · S2 (30,0) · S3 (30,30) · S4 (0,30) ภาพเคลื่อนไหวช้าลงราว 4,000 เท่า เพื่อให้มองเห็นคลื่น</p>
+        <div class="table-wrap">
+          <table class="demo-table">
+            <caption class="sr-only">ผลการจำลอง เวลามาถึงของแต่ละเซนเซอร์</caption>
+            <thead><tr><th scope="col">เซนเซอร์</th><th scope="col">ลำดับ</th><th scope="col">ระยะ (ซม.)</th><th scope="col">Δt (µs)</th></tr></thead>
+            <tbody id="demoRows">
+              <tr><th scope="row">S1 (0,0)</th><td>–</td><td>–</td><td>–</td></tr>
+              <tr><th scope="row">S2 (30,0)</th><td>–</td><td>–</td><td>–</td></tr>
+              <tr><th scope="row">S3 (30,30)</th><td>–</td><td>–</td><td>–</td></tr>
+              <tr><th scope="row">S4 (0,30)</th><td>–</td><td>–</td><td>–</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="demo-out" aria-live="polite" id="demoOut">
+          <p class="demo-out-l">ตำแหน่งที่คำนวณจาก Δt</p>
+          <p class="demo-out-v mono" id="demoPos">ยังไม่ได้วางจุด</p>
+          <p class="demo-out-n" id="demoMsg">เลือกจุดบนแผ่นเพื่อเริ่มจำลอง</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- photo band: clip reveal -->
+<figure class="band band-reveal" aria-labelledby="band2c">
+  <div class="band-media"><img src="assets/img/prototype-plate-sm.webp" srcset="assets/img/prototype-plate-sm.webp 800w, assets/img/prototype-plate.webp 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="ต้นแบบจริง: แผ่นอะคริลิก 40 × 40 ซม. เซนเซอร์ 4 ตัวที่มุมกรอบ 30 × 30 ซม."></div>
+  <figcaption id="band2c" class="band-cap"><span class="band-k">ต้นแบบจริง</span>แผ่นอะคริลิก 40 × 40 ซม. เซนเซอร์ 4 ตัวที่มุมกรอบ 30 × 30 ซม.</figcaption>
+</figure>
+
+<!-- 05 SYSTEM -->
+<section id="system" class="chapter" aria-labelledby="h-sys" data-chapter="05" data-title="ระบบ">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">05</span>
+      <p class="chap-en" lang="en">System design</p>
+      <h2 id="h-sys" data-split>การออกแบบและสร้างระบบ</h2>
+    </header>
+    <div class="sys-top">
+      <p class="lede" data-reveal>เซนเซอร์ทั้ง 4 ตัวติดที่มุมของกรอบสี่เหลี่ยมจัตุรัส 30 × 30 ซม. บนแผ่นอะคริลิก 40 × 40 ซม. โดยมุมล่างซ้ายเป็นจุดกำเนิดพิกัด เลือกรูปจัตุรัสเพราะให้ความสมมาตรทั้งสองแกน ความแม่นยำจึงกระจายสม่ำเสมอทั่วพื้นที่ และแผ่นต้องยกลอยด้วยโฟมรองสี่มุม เพราะถ้าวางแนบโต๊ะ พลังงานคลื่นจะรั่วลงโต๊ะจนเซนเซอร์ตัวไกลไม่ได้ยิน</p>
+      <figure class="frame" data-reveal>
+        <img src="assets/img/ui-3d-events-sm.webp" srcset="assets/img/ui-3d-events-sm.webp 800w, assets/img/ui-3d-events.webp 877w" sizes="(min-width: 900px) 560px, 92vw" width="800" height="597" loading="lazy" decoding="async" alt="ภาพสามมิติ: แท่งคือตำแหน่งและระดับพลังงาน วงแหวนคือความน่าเชื่อถือ">
+        <figcaption>ภาพสามมิติ: แท่งคือตำแหน่งและระดับพลังงาน วงแหวนคือความน่าเชื่อถือ</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="sub-h" data-reveal>ระบบแบ่งงานเป็นสามส่วน</h3>
+    <div class="sig" data-sig>
+      <ol class="sig-nodes">
+        <li><button type="button" class="sig-node is-on" data-i="0" aria-controls="sig-detail"><span class="sn-ic"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13"/><circle cx="20" cy="20" r="5"/></svg></span><span class="sn-k" aria-hidden="true">&nbsp;</span><span class="sn-l">เซนเซอร์เพียโซ 4 ตัว</span></button></li>
+        <li><button type="button" class="sig-node" data-i="1" aria-controls="sig-detail"><span class="sn-ic"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M15 10V5M20 10V5M25 10V5M15 35v-5M20 35v-5M25 35v-5M5 15h5M5 20h5M5 25h5M30 15h5M30 20h5M30 25h5"/></svg></span><span class="sn-k">ส่วนที่ 1</span><span class="sn-l">เฟิร์มแวร์บนบอร์ด</span></button></li>
+        <li><button type="button" class="sig-node" data-i="2" aria-controls="sig-detail"><span class="sn-ic"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="9" width="30" height="19" rx="2"/><path d="M14 34h12M20 28v6"/></svg></span><span class="sn-k">ส่วนที่ 2</span><span class="sn-l">โปรแกรมบนคอมพิวเตอร์</span></button></li>
+        <li><button type="button" class="sig-node" data-i="3" aria-controls="sig-detail"><span class="sn-ic"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 14l14-8 14 8v14l-14 8-14-8zM6 14l14 8 14-8M20 22v14"/></svg></span><span class="sn-k">ส่วนที่ 3</span><span class="sn-l">หน้าเว็บสามมิติ</span></button></li>
+      </ol>
+      <div class="sig-track" aria-hidden="true"><i class="sig-pulse"></i></div>
+      <div class="sig-detail" id="sig-detail" aria-live="polite">
+        <div class="sd is-on" data-i="0"><h4>เซนเซอร์เพียโซอิเล็กทริก 4 ตัว</h4><p>เซนเซอร์ทั้ง 4 ตัวติดที่มุมของกรอบสี่เหลี่ยมจัตุรัส 30 × 30 ซม. บนแผ่นอะคริลิก 40 × 40 ซม.</p></div>
+        <div class="sd" data-i="1"><span class="pipe-k">ส่วนที่ 1</span><h4>เฟิร์มแวร์บนบอร์ด</h4><p>สุ่ม 4 ช่องวนรอบ 26.0 ไมโครวินาทีต่อรอบ ได้ 38,462 ตัวอย่างต่อวินาทีต่อช่อง เก็บลงบัฟเฟอร์วงกลมด้วย DMA เมื่อเกินเกณฑ์จะบันทึกย้อนหลัง 512 รอบและต่อไปอีก 1,536 รอบ รวม 2,048 รอบต่อเหตุการณ์</p></div>
+        <div class="sd" data-i="2"><span class="pipe-k">ส่วนที่ 2</span><h4>โปรแกรมบนคอมพิวเตอร์</h4><p>หาจุดเริ่มคลื่นด้วยเกณฑ์ 3% ของยอดคลื่นของช่องนั้นเอง คำนวณตำแหน่งด้วยการค้นหาบนตารางสองชั้น ตรวจความน่าเชื่อถือแบบตัดออกทีละตัว และจำแนกระดับพลังงาน</p></div>
+        <div class="sd" data-i="3"><span class="pipe-k">ส่วนที่ 3</span><h4>หน้าเว็บสามมิติ</h4><p>ใช้ Three.js โดยแยกความหมายของสีชัดเจน สีแท่งคือระดับพลังงาน สีวงแหวนคือความน่าเชื่อถือ</p></div>
+      </div>
+    </div>
+
+    <figure class="scope instrument" data-reveal>
+      <div class="scope-head">
+        <p class="scope-t">สัญญาณ 4 ช่อง และจุดเริ่มคลื่น</p>
+        <p class="badge"><span class="badge-dot" aria-hidden="true"></span>ภาพจำลอง ไม่ใช่รูปคลื่นจริงจากเครื่อง</p>
+      </div>
+      <canvas id="scopeCanvas" role="img" aria-label="ภาพจำลองออสซิลโลสโคป 4 ช่อง คลื่นมาถึงแต่ละเซนเซอร์ไม่พร้อมกัน เส้นแนวตั้งคือจุดเริ่มคลื่นที่เกณฑ์ร้อยละ 3 ของยอดคลื่นของแต่ละช่อง"></canvas>
+      <figcaption class="scope-cap mono"><span>ช่องละ 38,462 ตัวอย่าง/วินาที</span><span>เส้นประ = เกณฑ์ 3% ของยอดคลื่นช่องนั้น</span><span id="scopeDt">Δt คำนวณจาก v = 675 m/s</span></figcaption>
+    </figure>
+
+    <h3 class="sub-h" data-reveal>อุปกรณ์ (Materials and Equipment)</h3>
+    <div class="eqp" data-eqp data-reveal>
+      <figure class="kit-fig" aria-hidden="true">
+        <img class="is-on" data-i="0" src="assets/img/stm32-board-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="">
+        <img data-i="1" src="assets/img/drop-tube-2-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="">
+        <img data-i="2" src="assets/img/ui-idle-sm.webp" width="668" height="800" loading="lazy" decoding="async" alt="">
+      </figure>
+      <div class="kit-body">
+        <div class="kit-head">
+          <div class="eqp-tabs" role="tablist" aria-label="กลุ่มอุปกรณ์">
+            <button type="button" role="tab" id="et-0" aria-controls="ep-0" aria-selected="true">ฮาร์ดแวร์</button>
+            <button type="button" role="tab" id="et-1" aria-controls="ep-1" aria-selected="false">วัสดุทดสอบ</button>
+            <button type="button" role="tab" id="et-2" aria-controls="ep-2" aria-selected="false">ซอฟต์แวร์</button>
+          </div>
+          <p class="kit-count" aria-hidden="true"><b id="kitN">6</b><span>รายการ</span></p>
+        </div>
+        <div class="eqp-panels">
+          <div role="tabpanel" id="ep-0" aria-labelledby="et-0"><h4>ฮาร์ดแวร์</h4><ul class="eqp-list"><li><span class="it">STM32F411CEU6 (บอร์ด Black Pill)</span><span class="qt">1 ชุด</span></li><li><span class="it">เซนเซอร์เพียโซอิเล็กทริก</span><span class="qt">4 ตัว</span></li><li><span class="it">ตัวต้านทานป้องกันวงจร</span><span class="qt">10K โอห์ม 4 ตัว</span></li><li><span class="it">ตัวต้านทานคายประจุ</span><span class="qt">10K โอห์ม 4 ตัว</span></li><li><span class="it">โปรโตบอร์ด สายจัมเปอร์</span></li><li><span class="it">สาย USB Type-C และคอมพิวเตอร์ Windows</span></li></ul></div>
+          <div role="tabpanel" id="ep-1" aria-labelledby="et-1"><h4>วัสดุทดสอบ</h4><ul class="eqp-list"><li><span class="it">แผ่นอะคริลิกใส</span><span class="qt">40 × 40 ซม. หนา 5 มม.</span></li><li><span class="it">แผ่นโฟม</span><span class="qt">หนา 1 ซม. รองมุมแผ่นทั้งสี่มุม</span></li><li><span class="it">เทปกาวใสยึดเซนเซอร์</span></li><li><span class="it">น็อตโลหะ (แหล่งกำเนิดคลื่นจำลอง)</span><span class="qt">มวล 5.4 กรัม</span></li><li><span class="it">ท่อนำแนวดิ่ง</span><span class="qt">เส้นผ่านศูนย์กลางภายใน 1.3 ซม. ยาว 10 ซม.</span></li></ul></div>
+          <div role="tabpanel" id="ep-2" aria-labelledby="et-2"><h4>ซอฟต์แวร์</h4><ul class="eqp-list"><li><span class="it">STM32CubeMX</span></li><li><span class="it">STM32CubeIDE</span></li><li><span class="it">STM32CubeProgrammer</span></li><li><span class="it">ภาษาซี + HAL</span></li><li><span class="it">Python 3.14 + pyserial</span></li><li><span class="it">Three.js r128 (WebGL)</span></li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h" data-reveal>ขั้นตอน 15 ขั้น 4 ระยะ</h3>
+    <p class="intro" data-reveal>เราแบ่งงานเป็น 15 ขั้นตอน โดยออกแบบให้แต่ละขั้นต้องทดสอบผ่านก่อนจึงขึ้นขั้นถัดไป เพื่อว่าถ้าเกิดปัญหาจะรู้ทันทีว่ามาจากส่วนไหน ไม่ต้องไล่หาจากทั้งระบบพร้อมกัน</p>
+    <div class="timeline">
+      <span class="tl-line" aria-hidden="true"><i id="tlFill"></i></span>
+      <ol class="phases">
+        <li class="phase" data-reveal>
+          <h4><span class="ph-no">ระยะที่ 1</span> เตรียมความพร้อม</h4>
+          <ol start="1"><li>ศึกษาทฤษฎีคลื่นในวัสดุและออกแบบโครงสร้างระบบ</li><li>ติดตั้งเครื่องมือพัฒนา และทดสอบอัปโหลดโปรแกรม</li><li>ทดสอบการสื่อสารระหว่างบอร์ดกับคอมพิวเตอร์</li></ol>
+        </li>
+        <li class="phase" data-reveal>
+          <h4><span class="ph-no">ระยะที่ 2</span> สร้างระบบรับสัญญาณ</h4>
+          <ol start="4"><li>อ่านสัญญาณครบ 4 ช่องแบบวนรอบด้วย ADC + DMA</li><li>ต่อเซนเซอร์เพียโซตัวแรกพร้อมวงจรป้องกัน</li><li>พัฒนากลไกตรวจจับเหตุการณ์และบันทึกรูปคลื่น</li></ol>
+        </li>
+        <li class="phase" data-reveal>
+          <h4><span class="ph-no">ระยะที่ 3</span> คำนวณตำแหน่ง</h4>
+          <ol start="7"><li>พัฒนาการหาจุดเริ่มคลื่นจากรูปคลื่นที่บันทึกได้</li><li>ทดสอบระบุตำแหน่งในหนึ่งมิติด้วยเซนเซอร์ 2 ตัว</li><li>ขยายเป็น 4 เซนเซอร์ และระบุตำแหน่งสองมิติ</li><li>ตรวจสอบสัญญาณรบกวนข้ามช่อง</li></ol>
+        </li>
+        <li class="phase" data-reveal>
+          <h4><span class="ph-no">ระยะที่ 4</span> ขยายผลและทดลอง</h4>
+          <ol start="11"><li>ออกแบบแหล่งกำเนิดคลื่นและสอบเทียบอัตราเร็วคลื่น</li><li>พัฒนาระบบแสดงผลสามมิติบนเว็บเบราว์เซอร์</li><li>เพิ่มกลไกตรวจสอบความน่าเชื่อถือด้วยตนเอง</li><li>เพิ่มการจำแนกระดับพลังงาน 3 ระดับ</li><li>เก็บข้อมูลการทดลองและวิเคราะห์ผล</li></ol>
+        </li>
+      </ol>
+    </div>
+
+    <h3 class="sub-h" data-reveal>การทดลอง 3 ชุด</h3>
+    <ol class="xp" data-xp><li class="xp-i is-open"><h4 class="xp-h"><button type="button" aria-expanded="true" aria-controls="xp1"><span class="xp-n" aria-hidden="true">1</span><span class="xp-k">การทดลองที่ 1</span><span class="xp-t">ความแม่นยำ</span></button></h4><div class="xp-b" id="xp1"><div><p>ทดสอบ 3 ตำแหน่ง คือจุดกึ่งกลางกรอบและจุดเยื้องตามแนวทแยงทั้งสองด้าน หย่อนน็อตจุดละ 10 ครั้ง บันทึกพิกัดที่ระบบรายงาน ผลต่างเวลา แอมพลิจูด และผลการตรวจแบบตัดออกทีละตัว</p></div></div></li><li class="xp-i"><h4 class="xp-h"><button type="button" aria-expanded="false" aria-controls="xp2"><span class="xp-n" aria-hidden="true">2</span><span class="xp-k">การทดลองที่ 2</span><span class="xp-t">การวิเคราะห์ความถี่</span></button></h4><div class="xp-b" id="xp2"><div><p>ใช้ FFT กับรูปคลื่นจริงทั้งหมด แล้วตรวจยืนยันด้วยสองวิธีที่เป็นอิสระจาก FFT คือนับจุดตัดศูนย์ในโดเมนเวลา และตรวจด้วยสายตาจากรูปคลื่น</p></div></div></li><li class="xp-i"><h4 class="xp-h"><button type="button" aria-expanded="false" aria-controls="xp3"><span class="xp-n" aria-hidden="true">3</span><span class="xp-k">การทดลองที่ 3</span><span class="xp-t">การจำแนกพลังงาน</span></button></h4><div class="xp-b" id="xp3"><div><p>ทดสอบด้วยสัญญาณจำลองที่รู้ค่าแน่นอน ครอบคลุมทั้งสามระดับและค่าที่ต่ำกว่าเกณฑ์ ก่อนนำข้อมูลจริงมาจำแนก</p></div></div></li></ol>
+  </div>
+</section>
+
+<!-- photo triptych -->
+<div class="triptych" aria-label="ภาพจากการทำงาน">
+  <figure class="tri tri-a"><img src="assets/img/firmware-dev-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="เขียนและอัปโหลดเฟิร์มแวร์ด้วย STM32CubeIDE"><figcaption>เขียนและอัปโหลดเฟิร์มแวร์ด้วย STM32CubeIDE</figcaption></figure>
+  <figure class="tri tri-b"><img src="assets/img/drop-tube-1-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="หย่อนน็อตผ่านท่อนำแนวดิ่ง — แหล่งกำเนิดคลื่นที่ให้พลังงานเท่ากันทุกครั้ง"><figcaption>หย่อนน็อตผ่านท่อนำแนวดิ่ง — แหล่งกำเนิดคลื่นที่ให้พลังงานเท่ากันทุกครั้ง</figcaption></figure>
+  <figure class="tri tri-c"><img src="assets/img/student-assembly-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="ประกอบและต่อวงจรเซนเซอร์"><figcaption>ประกอบและต่อวงจรเซนเซอร์</figcaption></figure>
+</div>
+
+<!-- 06 RESULTS -->
+<section id="results" class="chapter" aria-labelledby="h-res" data-chapter="06" data-title="ผลการทดลอง">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">06</span>
+      <p class="chap-en" lang="en">Results</p>
+      <h2 id="h-res" data-split>ผลการทดลอง</h2>
+    </header>
+
+    <h3 class="sub-h" data-reveal>สมรรถนะระบบ</h3>
+    <p class="intro" data-reveal>ระบบที่สร้างขึ้นทำงานได้ครบวงจร ตั้งแต่ตรวจจับเหตุการณ์จนแสดงผลบนหน้าจอ</p>
+    <dl class="datasheet scopepanel" data-reveal>
+      <div class="spec s-wide" data-reveal><dt>อัตราการสุ่ม</dt><dd class="spec-comb-wrap" aria-hidden="true"><svg class="spec-comb" viewBox="0 0 600 56" preserveAspectRatio="none"><line x1="6" y1="27" x2="6" y2="29" class="k"/><line x1="18" y1="16" x2="18" y2="40"/><line x1="30" y1="9" x2="30" y2="47"/><line x1="42" y1="7" x2="42" y2="49"/><line x1="54" y1="12" x2="54" y2="44"/><line x1="66" y1="20" x2="66" y2="36"/><line x1="78" y1="24" x2="78" y2="32"/><line x1="90" y1="16" x2="90" y2="40"/><line x1="102" y1="11" x2="102" y2="45" class="k"/><line x1="114" y1="11" x2="114" y2="45"/><line x1="126" y1="16" x2="126" y2="40"/><line x1="138" y1="24" x2="138" y2="32"/><line x1="150" y1="22" x2="150" y2="34"/><line x1="162" y1="16" x2="162" y2="40"/><line x1="174" y1="14" x2="174" y2="42"/><line x1="186" y1="15" x2="186" y2="41"/><line x1="198" y1="20" x2="198" y2="36" class="k"/><line x1="210" y1="26" x2="210" y2="30"/><line x1="222" y1="22" x2="222" y2="34"/><line x1="234" y1="17" x2="234" y2="39"/><line x1="246" y1="16" x2="246" y2="40"/><line x1="258" y1="18" x2="258" y2="38"/><line x1="270" y1="22" x2="270" y2="34"/><line x1="282" y1="26" x2="282" y2="30"/><line x1="294" y1="21" x2="294" y2="35" class="k"/><line x1="306" y1="19" x2="306" y2="37"/><line x1="318" y1="18" x2="318" y2="38"/><line x1="330" y1="21" x2="330" y2="35"/><line x1="342" y1="24" x2="342" y2="32"/><line x1="354" y1="25" x2="354" y2="31"/><line x1="366" y1="22" x2="366" y2="34"/><line x1="378" y1="20" x2="378" y2="36"/><line x1="390" y1="20" x2="390" y2="36" class="k"/><line x1="402" y1="23" x2="402" y2="33"/><line x1="414" y1="26" x2="414" y2="30"/><line x1="426" y1="24" x2="426" y2="32"/><line x1="438" y1="22" x2="438" y2="34"/><line x1="450" y1="21" x2="450" y2="35"/><line x1="462" y1="22" x2="462" y2="34"/><line x1="474" y1="24" x2="474" y2="32"/><line x1="486" y1="27" x2="486" y2="29" class="k"/><line x1="498" y1="24" x2="498" y2="32"/><line x1="510" y1="22" x2="510" y2="34"/><line x1="522" y1="22" x2="522" y2="34"/><line x1="534" y1="23" x2="534" y2="33"/><line x1="546" y1="25" x2="546" y2="31"/><line x1="558" y1="26" x2="558" y2="30"/><line x1="570" y1="24" x2="570" y2="32"/><line x1="582" y1="23" x2="582" y2="33" class="k"/><line x1="594" y1="23" x2="594" y2="33"/></svg></dd><dd class="spec-v"><span class="big" data-scramble>38,462</span> <span class="spec-u">ตัวอย่าง/วินาที/ช่อง</span></dd><dd class="spec-s">คาบ 26.0 ไมโครวินาที</dd></div>
+      <div class="spec" data-reveal><dt>ขีดจำกัดความถี่ตามทฤษฎีไนควิสต์</dt><dd class="spec-v"><span class="big" data-scramble>19,231</span> <span class="spec-u">Hz</span></dd></div>
+      <div class="spec" data-reveal><dt>ความละเอียด</dt><dd class="spec-v"><span class="big" data-scramble>12</span> <span class="spec-u">บิต</span></dd><dd class="spec-s">805.66 ไมโครโวลต์ต่อระดับ</dd></div>
+      <div class="spec" data-reveal><dt>บันทึกต่อเหตุการณ์</dt><dd class="spec-v"><span class="big" data-scramble>2,048</span> <span class="spec-u">รอบ</span></dd><dd class="spec-s">ครอบคลุม 4 ช่อง รวม 8,192 ค่า</dd></div>
+      <div class="spec" data-reveal><dt>สัญญาณรบกวนพื้นฐาน</dt><dd class="spec-v"><span class="big" data-scramble>5&ndash;9</span> <span class="spec-u">ระดับ</span></dd></div>
+      <div class="spec" data-reveal><dt>ความหน่วงของการแสดงผล</dt><dd class="spec-v"><span class="big" data-scramble>&le; 200</span> <span class="spec-u">ms</span></dd></div>
+    </dl>
+
+    <h3 class="sub-h" data-reveal>การสอบเทียบ — 675 m/s</h3>
+    <div class="cols">
+      <div class="prose" data-reveal>
+        <p>ได้อัตราเร็วคลื่นในแผ่นอะคริลิก 675 เมตรต่อวินาที ค่านี้ต่ำกว่าอัตราเร็วคลื่นตามยาวในเนื้ออะคริลิกซึ่งอยู่ระดับหลักพันเมตรต่อวินาทีมาก เพราะสิ่งที่ระบบตรวจจับได้ไม่ใช่คลื่นตามยาว แต่เป็นคลื่นดัดโค้งที่เดินทางในแผ่นบาง</p>
+        <p><strong>ที่สำคัญกว่าตัวเลขคือ ค่าที่เคยได้และภายหลังพบว่าผิด</strong> ในการสอบเทียบช่วงแรกเราได้ 826, 996 และ 1,041 เมตรต่อวินาที ทั้งสามค่าเกิดจากการใช้สูตรที่นำระยะห่างระหว่างเซนเซอร์มาหารด้วยผลต่างเวลา แทนที่จะใช้ผลต่างของระยะทางจากจุดกำเนิดจริงถึงเซนเซอร์ทั้งสองตัว เมื่อแก้สูตรให้ถูกต้อง ค่าเปลี่ยนเป็น 675 และความแม่นยำของการระบุตำแหน่งดีขึ้นอย่างชัดเจน</p>
+      </div>
+      <figure class="calib instrument" id="calib" role="img" aria-label="ลำดับการสอบเทียบ: ค่าจากสูตรเดิมที่ผิด 826, 996 และ 1,041 เมตรต่อวินาที ถูกตัดทิ้ง แล้วแก้สูตรได้ 675 เมตรต่อวินาที">
+        <div class="calib-lock" aria-hidden="true"><span class="calib-v" id="calibV">675</span><span class="calib-u">m/s</span><span class="calib-s" id="calibS">ค่าที่ใช้จริง</span></div>
+        <div class="bars" aria-hidden="true">
+          <div class="bar is-wrong"><span class="bar-l">ครั้งที่ 1 (สูตรเดิม)</span><span class="bar-t"><i style="--w:79.3%"></i><b class="bar-x"></b></span><span class="bar-v">826</span></div>
+          <div class="bar is-wrong"><span class="bar-l">ครั้งที่ 2 (สูตรเดิม)</span><span class="bar-t"><i style="--w:95.7%"></i><b class="bar-x"></b></span><span class="bar-v">996</span></div>
+          <div class="bar is-wrong"><span class="bar-l">ครั้งที่ 3 (สูตรเดิม)</span><span class="bar-t"><i style="--w:100%"></i><b class="bar-x"></b></span><span class="bar-v">1,041</span></div>
+          <div class="bar is-right"><span class="bar-l">แก้สูตรแล้ว</span><span class="bar-t"><i style="--w:64.8%"></i></span><span class="bar-v">675</span></div>
+        </div>
+        <figcaption class="calib-cap">หน่วย m/s · แถบที่มีเส้นขีดคือค่าที่พบภายหลังว่าผิด</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="sub-h" data-reveal>ความแม่นยำในการระบุตำแหน่ง</h3>
+    <p class="intro" data-reveal>หย่อนน็อตจุดละ 10 ครั้ง แล้วคัดเหตุการณ์ที่ไม่ผ่านเกณฑ์การตรวจสอบตัวเองออก</p>
+    <div class="cols cols-plot">
+      <div class="tbl" data-reveal>
+        <table class="ed ed--kv data acc">
+          <caption class="sr-only">ความแม่นยำในการระบุตำแหน่งที่ 3 จุด</caption>
+          <thead><tr><th scope="col">ตำแหน่งจริง (ซม.)</th><th scope="col">ผ่านเกณฑ์</th><th scope="col">ศูนย์กลางที่วัดได้</th><th scope="col">คลาดเคลื่อนเฉลี่ย</th><th scope="col">สูงสุด</th><th scope="col">การกระจาย</th><th scope="col">ความเอนเอียง</th></tr></thead>
+          <tbody>
+            <tr tabindex="0" data-pt="0"><th scope="row" class="mono" data-label="ตำแหน่งจริง (ซม.)">(15.0, 15.0)</th><td data-label="ผ่านเกณฑ์">10</td><td class="mono" data-label="ศูนย์กลางที่วัดได้">(14.25, 14.06)</td><td data-label="คลาดเคลื่อนเฉลี่ย">1.30 ซม.</td><td data-label="สูงสุด">2.36 ซม.</td><td data-label="การกระจาย">0.71 ซม.</td><td data-label="ความเอนเอียง">1.20 ซม.</td></tr>
+            <tr tabindex="0" data-pt="1"><th scope="row" class="mono" data-label="ตำแหน่งจริง (ซม.)">(7.5, 7.5)</th><td data-label="ผ่านเกณฑ์">3</td><td class="mono" data-label="ศูนย์กลางที่วัดได้">(6.83, 9.53)</td><td data-label="คลาดเคลื่อนเฉลี่ย">2.28 ซม.</td><td data-label="สูงสุด">3.00 ซม.</td><td data-label="การกระจาย">0.96 ซม.</td><td data-label="ความเอนเอียง">2.14 ซม.</td></tr>
+            <tr tabindex="0" data-pt="2"><th scope="row" class="mono" data-label="ตำแหน่งจริง (ซม.)">(22.5, 22.5)</th><td data-label="ผ่านเกณฑ์">6</td><td class="mono" data-label="ศูนย์กลางที่วัดได้">(22.00, 22.13)</td><td data-label="คลาดเคลื่อนเฉลี่ย">0.94 ซม.</td><td data-label="สูงสุด">1.84 ซม.</td><td data-label="การกระจาย">0.95 ซม.</td><td data-label="ความเอนเอียง">0.62 ซม.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="plot" data-reveal id="plot">
+        <svg viewBox="0 0 500 520" role="img" aria-labelledby="plotT plotD" focusable="false">
+          <title id="plotT">ตำแหน่งจริงเทียบกับศูนย์กลางที่วัดได้บนแผ่น 30 × 30 ซม.</title>
+          <desc id="plotD">จุดกลวงคือตำแหน่งจริง จุดทึบสีฟ้าคือศูนย์กลางที่วัดได้ ที่ (15.0, 15.0) วัดได้ (14.25, 14.06) ที่ (7.5, 7.5) วัดได้ (6.83, 9.53) ที่ (22.5, 22.5) วัดได้ (22.00, 22.13) เซนเซอร์อยู่ที่มุมทั้งสี่</desc>
+          <g class="pl-grid">
+            <path d="M40 40H460V460H40Z" class="pl-frame"/>
+            <path d="M110 40V460M180 40V460M250 40V460M320 40V460M390 40V460M40 110H460M40 180H460M40 250H460M40 320H460M40 390H460"/>
+          </g>
+          <g class="pl-sensors">
+            <circle cx="40" cy="460" r="9"/><circle cx="460" cy="460" r="9"/><circle cx="460" cy="40" r="9"/><circle cx="40" cy="40" r="9"/>
+          </g>
+          <g class="pl-lab" font-size="16">
+            <text x="58" y="486">S1</text><text x="424" y="486">S2</text><text x="424" y="30">S3</text><text x="58" y="30">S4</text>
+            <text x="40" y="508" text-anchor="middle">0</text><text x="250" y="508" text-anchor="middle">15</text><text x="460" y="508" text-anchor="middle">30 ซม.</text>
+          </g>
+          <g class="pl-err">
+            <circle cx="250" cy="250" r="18.2"/><circle cx="145" cy="355" r="31.9"/><circle cx="355" cy="145" r="13.2"/>
+          </g>
+          <g class="pl-links" stroke-width="1.5">
+            <path d="M250 250L239.5 263.2"/><path d="M145 355L135.6 326.6"/><path d="M355 145L348 150.2"/>
+          </g>
+          <g class="pl-true">
+            <circle cx="250" cy="250" r="7"/><circle cx="145" cy="355" r="7"/><circle cx="355" cy="145" r="7"/>
+          </g>
+          <g class="pl-meas">
+            <circle cx="239.5" cy="263.2" r="4.5"/><circle cx="135.6" cy="326.6" r="4.5"/><circle cx="348" cy="150.2" r="4.5"/>
+          </g>
+          <g class="pl-lab pl-lab-pt" font-size="16">
+            <text x="266" y="240">(15.0, 15.0)</text><text x="160" y="378">(7.5, 7.5)</text><text x="372" y="133">(22.5, 22.5)</text>
+          </g>
+        </svg>
+        <figcaption class="plot-cap">
+          <span class="key"><i class="k-true"></i>ตำแหน่งจริง</span>
+          <span class="key"><i class="k-meas"></i>ศูนย์กลางที่วัดได้</span>
+          <span class="key"><i class="k-err"></i>คลาดเคลื่อนเฉลี่ย</span>
+          <span class="key"><i class="k-sens"></i>เซนเซอร์</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="selfcheck" id="selfcheck">
+      <div class="selfcheck-aura" aria-hidden="true"></div>
+      <div class="selfcheck-head" data-reveal>
+        <p class="hl-k">ไฮไลต์ของโครงงาน</p>
+        <h3 class="sub-h sub-h-xl">กลไกตรวจสอบตัวเอง</h3>
+        <p class="lede">ผลที่น่าสนใจที่สุดของโครงงานนี้ คือสัดส่วนของเหตุการณ์ที่ระบบตัดทิ้งเอง สอดคล้องกับความคลาดเคลื่อนจริงของแต่ละตำแหน่ง</p>
+      </div>
+      <ul class="reject" aria-label="จำนวนเหตุการณ์ที่ระบบตัดทิ้ง จากการหย่อน 10 ครั้งต่อตำแหน่ง">
+        <li>
+          <div class="reject-h"><span class="mono">(15.0, 15.0)</span><span class="reject-n"><b>0</b>/10</span></div>
+          <div class="drops" aria-hidden="true" data-no="0"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p>แม่นที่สุด ระบบไม่ตัดข้อมูลทิ้งเลย</p>
+        </li>
+        <li>
+          <div class="reject-h"><span class="mono">(22.5, 22.5)</span><span class="reject-n"><b>4</b>/10</span></div>
+          <div class="drops" aria-hidden="true" data-no="4"><i></i><i></i><i></i><i></i><i></i><i></i><i class="no"></i><i class="no"></i><i class="no"></i><i class="no"></i></div>
+          <p>ตัดทิ้ง 4 จาก 10</p>
+        </li>
+        <li>
+          <div class="reject-h"><span class="mono">(7.5, 7.5)</span><span class="reject-n"><b>7</b>/10</span></div>
+          <div class="drops" aria-hidden="true" data-no="7"><i></i><i></i><i></i><i class="no"></i><i class="no"></i><i class="no"></i><i class="no"></i><i class="no"></i><i class="no"></i><i class="no"></i></div>
+          <p>คลาดเคลื่อนจริงมากที่สุด ระบบตัดทิ้งถึง 7 จาก 10</p>
+        </li>
+        <li class="reject-key"><span><i></i>ผ่านเกณฑ์</span><span><i class="no"></i>ถูกตัดทิ้ง</span></li>
+      </ul>
+      <div class="cols selfcheck-body" data-reveal>
+        <p>โดยที่ระบบไม่เคยทราบตำแหน่งจริงมาก่อน การตัดสินใจทั้งหมดอาศัยเพียงความสอดคล้องกันของข้อมูลจากเซนเซอร์ทั้งสี่ตัว นี่คือหลักฐานว่ากลไกตรวจสอบตัวเองใช้ได้จริงในสถานการณ์ที่ไม่รู้คำตอบล่วงหน้า ซึ่งก็คือสถานการณ์ใช้งานจริงทุกกรณี</p>
+        <p>ก่อนหน้านี้เราลองใช้ค่าเศษเหลือจากการแก้สมการตามที่นิยมกัน แต่พบว่าใช้ไม่ได้ มีกรณีที่ความคลาดเคลื่อนจริงเป็นศูนย์แต่เศษเหลือสูงถึง 43.6 และกรณีที่คลาดเคลื่อนจริง 95.6 เซนติเมตรแต่เศษเหลือเพียง 5.4</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h" data-reveal>เทียบกับทฤษฎี (GDOP)</h3>
+    <div class="cols cols-figure">
+      <div class="prose" data-reveal>
+        <div class="vs" role="group" aria-label="เปรียบเทียบค่าทำนายจากแบบจำลองกับค่าจริง">
+          <div><span class="vs-v" data-scramble>1.41</span><span class="vs-u">ซม.</span><span class="vs-l">ค่าทำนายจากแบบจำลอง</span></div>
+          <div class="vs-real"><span class="vs-v" data-scramble>1.33</span><span class="vs-u">ซม.</span><span class="vs-l">ค่าจริงที่วัดได้</span></div>
+        </div>
+        <p>แบบจำลองจากหลักการเจือจางความแม่นยำเชิงเรขาคณิตทำนายว่าภายในกรอบเซนเซอร์ควรคลาดเคลื่อนราว 1.41 เซนติเมตร ค่าจริงคือ 1.33 ใกล้เคียงกันมาก แปลว่าระบบทำงานใกล้ขีดจำกัดของวิธีการแล้ว การจะแม่นกว่านี้ต้องลดความไม่แน่นอนของการวัดเวลา ไม่ใช่ปรับปรุงอัลกอริทึม</p>
+        <p class="small-note">แผนที่จากการจำลอง: ในกรอบมัธยฐาน 1.41 ซม. · นอกกรอบมัธยฐาน 1.80 ซม. · แย่สุด 4.83 ซม.</p>
+      </div>
+      <figure class="frame frame-light" data-reveal>
+        <img src="assets/img/gdop-map-sm.webp" srcset="assets/img/gdop-map-sm.webp 800w, assets/img/gdop-map.webp 1600w" sizes="(min-width: 900px) 520px, 92vw" width="800" height="762" loading="lazy" decoding="async" alt="แผนที่ความคลาดเคลื่อนของการระบุตำแหน่งจากการจำลอง (GDOP)">
+        <figcaption>แผนที่ความคลาดเคลื่อนของการระบุตำแหน่งจากการจำลอง (GDOP)</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="sub-h" data-reveal>การวิเคราะห์ความถี่</h3>
+    <div class="freq">
+      <div class="freq-nums" data-reveal>
+        <div><span class="freq-v" data-scramble>1,712</span><span class="freq-u">Hz</span><span class="freq-l">ค่ามัธยฐานของความถี่หลัก</span></div>
+        <div><span class="freq-v" data-scramble>1,931</span><span class="freq-u">Hz</span><span class="freq-l">ค่าเฉลี่ย</span></div>
+      </div>
+      <div class="prose" data-reveal>
+        <p>จากการวิเคราะห์รูปคลื่นจริง 111 ไฟล์ ได้ค่ามัธยฐานของความถี่หลัก <span class="mono hl">1,712</span> เฮิรตซ์ และค่าเฉลี่ย <span class="mono hl">1,931</span> เฮิรตซ์ ตรวจยืนยันด้วยสามวิธีที่เป็นอิสระจากกัน คือ FFT, การนับจุดตัดศูนย์ในโดเมนเวลา และการวาดรูปคลื่นตรวจด้วยสายตา</p>
+        <p>ค่านี้ต่ำกว่าย่าน 20 ถึง 90 กิโลเฮิรตซ์ของคลื่น AE จากรอยร้าวจริงอย่างมาก แต่เป็นข้อจำกัดที่รู้ตั้งแต่ต้น เพราะอัตราการสุ่มให้เพดานไนควิสต์ที่ 19,231 เฮิรตซ์อยู่แล้ว สิ่งที่ระบบจับได้จริงคือการตอบสนองแบบคลื่นดัดโค้งของแผ่นวัสดุ ซึ่งยังคงใช้ระบุตำแหน่งได้</p>
+      </div>
+      <aside class="callout" data-reveal>
+        <h4>ข้อผิดพลาดที่เจอและวิธีแก้</h4>
+        <p>การวิเคราะห์ช่วงแรกให้ค่ามัธยฐาน 275 เฮิรตซ์ ซึ่งขัดกับการนับคาบด้วยสายตาที่ได้ราว 1,300 เฮิรตซ์ พบว่าเกิดจากสองกลไกทำงานร่วมกัน (หน้าต่างวิเคราะห์ 16.4 มิลลิวินาทียาวกว่าตัวคลื่นจริงมาก + การคัดกรองด้วยเกณฑ์แอมพลิจูดของยอดสเปกตรัม ซึ่งตัดช่องที่มีเนื้อหาปกติทิ้งไปถึง 387 จาก 444 ช่อง) ความผิดพลาดนี้ตรวจไม่พบด้วยการทดสอบทีละกลไก เพราะต้องมีทั้งสองอย่างทำงานร่วมกันจึงจะเกิดขึ้น</p>
+      </aside>
+    </div>
+
+    <h3 class="sub-h" data-reveal>การจำแนกระดับพลังงาน</h3>
+    <div class="energy instrument" data-reveal>
+      <div class="energy-ctl">
+        <label class="energy-label" for="ampSlider">ลองเลื่อนแอมพลิจูด (ระดับ ADC)</label>
+        <div class="energy-read" aria-hidden="true"><span class="energy-amp" id="ampVal">300</span><span class="energy-amp-u">ระดับ</span></div>
+        <input type="range" id="ampSlider" min="50" max="2047" step="1" value="300" aria-describedby="ampOut">
+        <div class="energy-scale" aria-hidden="true"><span>50</span><span>172</span><span>594</span><span>2,047</span></div>
+        <output class="energy-out" id="ampOut" for="ampSlider" aria-live="polite"><span class="lv-chip" id="lvChip"><i></i><span id="lvName">ระดับ 2 ปานกลาง (Warning)</span></span><span class="energy-db">ช่วงเดซิเบลทางเสียง <b id="lvDb">102.9 – 113.6</b></span></output>
+        <p class="energy-note">ใช้เกณฑ์จริงของโครงงาน 172 และ 594 ระดับ บนสเกลลอการิทึม · ตัวเลื่อนนี้เป็นตัวช่วยอธิบาย ไม่ได้อ่านค่าจากเครื่อง</p>
+      </div>
+      <div class="energy-viz" aria-hidden="true">
+        <div class="ev-bar"><i id="evFill"></i><span class="ev-th ev-t1"></span><span class="ev-th ev-t2"></span></div>
+        <div class="ev-gauge">
+          <svg viewBox="0 0 220 130"><path class="evg-track" d="M20 115a90 90 0 0 1 180 0"/><path class="evg-g" d="M20 115a90 90 0 0 1 180 0" pathLength="100"/><path class="evg-y" d="M20 115a90 90 0 0 1 180 0" pathLength="100"/><path class="evg-r" d="M20 115a90 90 0 0 1 180 0" pathLength="100"/><line id="evNeedle" x1="110" y1="115" x2="110" y2="36"/><circle cx="110" cy="115" r="5"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="tbl" data-reveal>
+      <table class="ed ed--kv data levels">
+        <caption class="sr-only">การจำแนกระดับพลังงาน 3 ระดับ</caption>
+        <thead><tr><th scope="col">ระดับ</th><th scope="col">ช่วงแอมพลิจูด (ระดับ)</th><th scope="col">ช่วงเดซิเบลทางเสียง</th><th scope="col">สี</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" data-label="ระดับ">ระดับ 1 เล็กน้อย (Minor)</th><td class="mono" data-label="ช่วงแอมพลิจูด (ระดับ)">50 – 172</td><td class="mono" data-label="ช่วงเดซิเบลทางเสียง">92.1 – 102.9</td><td data-label="สี"><span class="lv lv-g"><i></i>เขียว</span></td></tr>
+          <tr><th scope="row" data-label="ระดับ">ระดับ 2 ปานกลาง (Warning)</th><td class="mono" data-label="ช่วงแอมพลิจูด (ระดับ)">172 – 594</td><td class="mono" data-label="ช่วงเดซิเบลทางเสียง">102.9 – 113.6</td><td data-label="สี"><span class="lv lv-y"><i></i>เหลือง</span></td></tr>
+          <tr><th scope="row" data-label="ระดับ">ระดับ 3 รุนแรง (Critical)</th><td class="mono" data-label="ช่วงแอมพลิจูด (ระดับ)">594 – 2,047</td><td class="mono" data-label="ช่วงเดซิเบลทางเสียง">113.6 – 124.3</td><td data-label="สี"><span class="lv lv-r"><i></i>แดง</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small-note" data-reveal>ทดสอบกับสัญญาณจำลองถูกต้อง 7 จาก 7 กรณี</p>
+  </div>
+</section>
+
+<!-- 07 DECISION -->
+<section id="decision" class="chapter decision" aria-labelledby="h-dec" data-chapter="07" data-title="ค่าชดเชย">
+  <div class="decision-aura" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">07</span>
+      <p class="chap-en" lang="en">The decision not to compensate</p>
+      <h2 id="h-dec" data-split>การตัดสินใจไม่ใช้ค่าชดเชย</h2>
+    </header>
+    <blockquote class="pull">
+      <p data-split>&ldquo;การปรับค่าให้ผลลัพธ์ดูดีขึ้นโดยไม่เข้าใจสาเหตุ ไม่ใช่การแก้ปัญหา แต่เป็นการซ่อนปัญหา&rdquo;</p>
+    </blockquote>
+    <ol class="story" data-tl>
+      <li class="story-c" data-reveal><div class="story-card">
+        <div class="story-fig" aria-hidden="true"><span class="sf-a"><b>0.71</b>การกระจาย</span><span class="sf-b"><b>1.30</b>คลาดเคลื่อนเฉลี่ย</span></div>
+        <p>ที่จุดกึ่งกลาง การกระจายของคำตอบอยู่ที่ 0.71 เซนติเมตร แต่ความคลาดเคลื่อนเฉลี่ยจากตำแหน่งจริงคือ 1.30 เซนติเมตร ความต่างนี้บอกว่ามีองค์ประกอบเชิงระบบขนาด 1.20 เซนติเมตรซ่อนอยู่ ซึ่งวัดซ้ำกี่ครั้งก็ไม่หาย</p>
+      </div></li>
+      <li class="story-c" data-reveal><div class="story-card">
+        <div class="story-fig" aria-hidden="true"><span class="sf-a"><b>−17.5</b>ch0 µs</span><span class="sf-b"><b>+19.8</b>ch2 µs</span></div>
+        <p>วัดความเบี่ยงเบนของเวลามาถึงจาก 18 เหตุการณ์ พบว่า ch0 เบี่ยง −17.5 ไมโครวินาที และ ch2 เบี่ยง +19.8 ไมโครวินาที ซึ่งเป็นเซนเซอร์คู่ทแยงมุมกันและเบี่ยงในทิศตรงข้าม</p>
+      </div></li>
+      <li class="story-c" data-reveal><div class="story-card">
+        <div class="story-bars" aria-hidden="true">
+          <span style="--w:12.6%" class="is-win"><em>0.33</em></span><span style="--w:54.6%"><em>1.43</em></span><span style="--w:100%"><em>2.62</em></span>
+        </div>
+        <p>เราตั้งสมมติฐาน 5 ข้อ แล้วเขียนคำทำนายเป็นตัวเลขไว้ล่วงหน้าก่อนทดลองทุกครั้ง ตัดออกได้ 4 ข้อ เหลือข้อเดียวคือความหน่วงจากการยึดเซนเซอร์ ซึ่งทำนายไว้ว่าจะได้ (15.8, 15.9) แล้วผลจริงออกมา (15.74, 16.22) ห่างกันเพียง 0.33 เซนติเมตร ในขณะที่สมมติฐานอื่นห่าง 1.43 และ 2.62 เซนติเมตร สาเหตุคือความหนาของเทปและแรงกดที่ยึดเซนเซอร์แต่ละตัวไม่เท่ากัน</p>
+      </div></li>
+      <li class="story-c is-turn" data-reveal><div class="story-card">
+        <div class="story-fig" aria-hidden="true"><span class="sf-a"><b>1.80</b>ซม.</span><span class="sf-arrow"></span><span class="sf-b sf-bad"><b>2.65</b>ซม.</span></div>
+        <p>แต่พอนำค่าความหน่วงไปชดเชยจริง กลับใช้ได้เฉพาะตำแหน่งที่หาค่ามา พอย้ายไปจุด (7.5, 7.5) ความคลาดเคลื่อนกลับเพิ่มจาก 1.80 เป็น 2.65 เซนติเมตร เราจึงตัดสินใจไม่ใช้ค่าชดเชย แม้ว่ามันจะทำให้ตัวเลขที่รายงานดูดีขึ้น</p>
+      </div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 08 CONCLUSION -->
+<section id="conclusion" class="chapter" aria-labelledby="h-con" data-chapter="08" data-title="สรุป">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">08</span>
+      <p class="chap-en" lang="en">Conclusion</p>
+      <h2 id="h-con" data-split>สรุปผล</h2>
+    </header>
+    <p class="lede" data-reveal>ระบบประกอบด้วยเซนเซอร์เพียโซ 4 ตัวที่มุมกรอบ 30 × 30 ซม. บนแผ่นอะคริลิกหนา 5 มม. ต่อกับ STM32 ที่สุ่มสัญญาณ 38,462 ตัวอย่างต่อวินาทีต่อช่อง ส่งเข้าคอมพิวเตอร์คำนวณตำแหน่งด้วยผลต่างเวลามาถึง แล้วแสดงผลบนเว็บ</p>
+
+    <div class="tally" data-reveal>
+      <p class="tally-n" aria-hidden="true"><b id="tallyN">2</b><span>/ 3</span></p>
+      <div class="tally-t"><p class="tally-l">บรรลุ 2 จาก 3 ข้อ · บรรลุบางส่วน 1 ข้อ</p><div class="tally-bar" aria-hidden="true"><i></i><i></i><i class="part"></i></div></div>
+    </div>
+    <ul class="checks" data-checks aria-label="ผลตามวัตถุประสงค์">
+      <li class="st" data-reveal>
+        <span class="st-ico ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <p class="st-state ok">บรรลุ</p>
+        <h3>สร้างระบบตรวจจับและระบุตำแหน่งด้วยคลื่นเสียงแบบเรียลไทม์</h3>
+        <p>ทำงานครบวงจร คลาดเคลื่อนเฉลี่ย 1.33 ซม. อยู่ในเกณฑ์ ±3 ซม. ครบร้อยละ 100</p>
+      </li>
+      <li class="st" data-reveal>
+        <span class="st-ico ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <p class="st-state ok">บรรลุ</p>
+        <h3>แสดงผลตำแหน่งแบบสามมิติได้ทันที</h3>
+        <p>แสดงผลบนเว็บเบราว์เซอร์ ความหน่วงไม่เกิน 200 มิลลิวินาที</p>
+      </li>
+      <li class="st" data-reveal>
+        <span class="st-ico part" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span>
+        <p class="st-state part">บรรลุบางส่วน</p>
+        <h3>จำแนกระดับพลังงานของเหตุการณ์ออกเป็น 3 ระดับ</h3>
+        <p>เกณฑ์คำนวณจากช่วงไดนามิกของฮาร์ดแวร์ ทดสอบกับสัญญาณจำลองถูกต้อง 7 จาก 7 แต่ยังไม่ได้ทดสอบระดับ 1 และ 3 ด้วยเหตุการณ์จริง</p>
+      </li>
+    </ul>
+
+    <div class="err-split" data-reveal>
+      <p class="err-k">ความคลาดเคลื่อนแบ่งเป็นสองส่วน:</p>
+      <div class="err-a"><span class="err-v" data-scramble>0.71</span><span class="err-u">ซม.</span><p><strong>ความไม่แน่นอนแบบสุ่ม</strong> (ลดได้ด้วยการวัดซ้ำแล้วเฉลี่ย)</p></div>
+      <span class="err-plus" aria-hidden="true">+</span>
+      <div class="err-b"><span class="err-v" data-scramble>1.20</span><span class="err-u">ซม.</span><p><strong>ความเอนเอียงเชิงระบบ</strong> (วัดซ้ำกี่ครั้งก็ไม่ลด)</p></div>
+    </div>
+
+    <h3 class="sub-h" data-reveal>เทียบกับงานวิจัย</h3>
+    <div class="vs3" data-vs><article class="vs-row" data-side="ours"><h4>ความละเอียด</h4><div class="vs-sw" role="group" aria-label="เลือกดู: ความละเอียด"><button type="button" data-s="other" aria-pressed="false">งานอื่น</button><button type="button" data-s="ours" aria-pressed="true">งานเรา</button><i class="vs-thumb" aria-hidden="true"></i></div><div class="vs-txt"><p data-s="other">Han และคณะ (2025) รายงานความถูกต้องร้อยละ 99.625 แต่เป็นการจำแนกว่าอยู่ช่องใดจาก 16 ช่อง ช่องละ 100 มม.</p><p data-s="ours">ส่วนเราให้พิกัดต่อเนื่องคลาด 13.3 มม. เทียบกันโดยตรงไม่ได้เพราะคนละมาตรวัด</p></div></article><article class="vs-row" data-side="ours"><h4>ระดับอุปกรณ์</h4><div class="vs-sw" role="group" aria-label="เลือกดู: ระดับอุปกรณ์"><button type="button" data-s="other" aria-pressed="false">งานอื่น</button><button type="button" data-s="ours" aria-pressed="true">งานเรา</button><i class="vs-thumb" aria-hidden="true"></i></div><div class="vs-txt"><p data-s="other">งานที่แม่นยำล้วนใช้เซนเซอร์เฉพาะทางระดับอุตสาหกรรม</p><p data-s="ours">เราใช้แผ่นเพียโซชนิดทำออดไฟฟ้าและไมโครคอนโทรลเลอร์ทั่วไป การที่หลักการเดียวกันยังทำงานได้ในระดับเซนติเมตร ทำให้เทคโนโลยีนี้เข้าถึงได้ในสถานศึกษาและหน่วยงานที่งบจำกัด</p></div></article><article class="vs-row" data-side="ours"><h4>การอธิบายได้</h4><div class="vs-sw" role="group" aria-label="เลือกดู: การอธิบายได้"><button type="button" data-s="other" aria-pressed="false">งานอื่น</button><button type="button" data-s="ours" aria-pressed="true">งานเรา</button><i class="vs-thumb" aria-hidden="true"></i></div><div class="vs-txt"><p data-s="other">วิธีเรียนรู้เชิงลึกอธิบายที่มาของคำตอบไม่ได้</p><p data-s="ours">แต่ TDOA ตั้งอยู่บนสมการฟิสิกส์ เมื่อผิดพลาดจึงตามหาสาเหตุเชิงกายภาพได้</p></div></article></div>
+
+    <div class="lim-future">
+      <div class="lim" data-reveal>
+        <h3 class="sub-h">ข้อจำกัด</h3>
+        <ol class="lim-list">
+          <li>ย่านความถี่วัดได้สูงสุด 19,231 Hz ต่ำกว่าย่าน AE จริง</li>
+          <li>ยังไม่ได้ทดสอบกับรอยร้าวจริง ใช้แหล่งกำเนิดจำลองจากการกระแทกเชิงกล</li>
+          <li>ทดสอบวัสดุชนิดเดียวขนาดเดียว ยังไม่ทราบผลกับวัสดุอื่นหรือรูปทรงซับซ้อน</li>
+          <li>พื้นที่ใช้งานจำกัดในกรอบเซนเซอร์ นอกกรอบคลาดเคลื่อนเพิ่มได้เกือบ 3 เท่า</li>
+          <li>ไม่มีวงจรขยาย จึงจับเหตุการณ์ที่เบามากไม่ได้ และจำกัดระยะทาง</li>
+          <li>ความหน่วงประจำเซนเซอร์ยังอธิบายไม่ครบ ทราบว่าเกิดจากการยึด แต่ไม่ทราบว่าทำไมจึงเปลี่ยนตามตำแหน่ง</li>
+          <li>ข้อมูลที่ผ่านเกณฑ์บางตำแหน่งยังน้อย โดยเฉพาะที่ (7.5, 7.5) เหลือ 3 เหตุการณ์</li>
+          <li>ต้องสอบเทียบใหม่ทุกครั้งที่ติดตั้งเซนเซอร์ใหม่ เพราะผูกกับคุณภาพการยึด</li>
+        </ol>
+      </div>
+      <div class="future" data-reveal>
+        <h3 class="sub-h">ข้อเสนอแนะ</h3>
+        <details class="fold" open>
+          <summary><span>ฮาร์ดแวร์</span><i aria-hidden="true"></i></summary>
+          <ul><li>เพิ่มอัตราการสุ่มเป็นอย่างน้อย 180,000 ตัวอย่างต่อวินาทีต่อช่อง เพื่อครอบคลุมย่าน AE จริง</li><li>เพิ่มวงจรขยายเพื่อจับเหตุการณ์ที่เบากว่าเดิม</li><li>เปลี่ยนเทปกาวเป็นตัวยึดแบบสปริงที่แรงกดสม่ำเสมอ</li><li>แก้วงจรกราวด์ถาวรด้วยแหล่งจ่ายไฟแยกอิสระ</li></ul>
+        </details>
+        <details class="fold">
+          <summary><span>ซอฟต์แวร์</span><i aria-hidden="true"></i></summary>
+          <ul><li>ทำระบบสอบเทียบความหน่วงอัตโนมัติพร้อมตรวจว่าค่าใช้ข้ามตำแหน่งได้ไหม</li><li>ศึกษาสาเหตุที่ความหน่วงเปลี่ยนตามตำแหน่ง</li></ul>
+        </details>
+        <details class="fold">
+          <summary><span>การทดลอง</span><i aria-hidden="true"></i></summary>
+          <ul><li>ทดสอบกับรอยร้าวจริง</li><li>ออกแบบแหล่งกำเนิดที่ปรับพลังงานได้เพื่อทดสอบครบ 3 ระดับ</li><li>ทดสอบหลายวัสดุหลายความหนา</li><li>เพิ่มจำนวนจุดเพื่อทำแผนที่ความแม่นยำจากการวัดจริง</li></ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <div class="closing-aura" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="closing-t" data-split>แต่สิ่งที่ได้จริงที่สุดคือกระบวนการทางวิทยาศาสตร์</p>
+      <p class="closing-b" data-reveal>โครงงานนี้ฝึกการตั้งสมมติฐานที่ทดสอบได้ การแยกสาเหตุทีละข้อ การทำนายผลไว้ก่อนทดลอง และที่สำคัญที่สุดคือการยอมรับเมื่อสมมติฐานของตัวเองถูกหักล้างด้วยข้อมูล ดังกรณีที่เราตัดสินใจไม่ใช้ค่าชดเชย</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 GALLERY (horizontal) -->
+<section id="gallery" class="chapter gallery-sec" aria-labelledby="h-gal" data-chapter="09" data-title="แกลเลอรี">
+  <div class="gallery-pin">
+    <div class="wrap">
+      <header class="chap chap-row">
+        <span class="chap-no" aria-hidden="true">09</span>
+        <div><p class="chap-en" lang="en">Gallery</p><h2 id="h-gal" data-split>รูปจากการทำงานจริง</h2></div>
+        <p class="gal-hint" aria-hidden="true">เลื่อนลงเพื่อดูต่อ · คลิกเพื่อขยาย</p>
+      </header>
+    </div>
+    <div class="gallery-view">
+      <ul class="gallery" id="gallery-list">
+        <li><button type="button" class="g-item g-tall" data-full="assets/img/stm32-board.webp" data-w="900" data-h="1600"><img src="assets/img/stm32-board-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="บอร์ด STM32F411CEU6 (Black Pill) หัวใจของระบบรับสัญญาณ"><span class="g-cap"><span class="g-no">01</span>บอร์ด STM32F411CEU6 (Black Pill) หัวใจของระบบรับสัญญาณ</span></button></li>
+        <li><button type="button" class="g-item g-wide" data-full="assets/img/piezo-sensors.webp" data-w="1600" data-h="900"><img src="assets/img/piezo-sensors-sm.webp" width="800" height="450" loading="lazy" decoding="async" alt="เซนเซอร์เพียโซอิเล็กทริกและตัวต้านทาน 10K โอห์ม"><span class="g-cap"><span class="g-no">02</span>เซนเซอร์เพียโซอิเล็กทริกและตัวต้านทาน 10K โอห์ม</span></button></li>
+        <li><button type="button" class="g-item g-tall" data-full="assets/img/firmware-dev.webp" data-w="900" data-h="1600"><img src="assets/img/firmware-dev-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="เขียนและอัปโหลดเฟิร์มแวร์ด้วย STM32CubeIDE"><span class="g-cap"><span class="g-no">03</span>เขียนและอัปโหลดเฟิร์มแวร์ด้วย STM32CubeIDE</span></button></li>
+        <li><button type="button" class="g-item g-tall" data-full="assets/img/student-assembly.webp" data-w="900" data-h="1600"><img src="assets/img/student-assembly-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="ประกอบและต่อวงจรเซนเซอร์"><span class="g-cap"><span class="g-no">04</span>ประกอบและต่อวงจรเซนเซอร์</span></button></li>
+        <li><button type="button" class="g-item g-wide" data-full="assets/img/prototype-plate.webp" data-w="1600" data-h="900"><img src="assets/img/prototype-plate-sm.webp" width="800" height="450" loading="lazy" decoding="async" alt="ต้นแบบจริง: แผ่นอะคริลิก 40 × 40 ซม. เซนเซอร์ 4 ตัวที่มุมกรอบ 30 × 30 ซม."><span class="g-cap"><span class="g-no">05</span>ต้นแบบจริง: แผ่นอะคริลิก 40 × 40 ซม. เซนเซอร์ 4 ตัวที่มุมกรอบ 30 × 30 ซม.</span></button></li>
+        <li><button type="button" class="g-item g-tall" data-full="assets/img/drop-tube-1.webp" data-w="900" data-h="1600"><img src="assets/img/drop-tube-1-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="หย่อนน็อตผ่านท่อนำแนวดิ่ง — แหล่งกำเนิดคลื่นที่ให้พลังงานเท่ากันทุกครั้ง"><span class="g-cap"><span class="g-no">06</span>หย่อนน็อตผ่านท่อนำแนวดิ่ง — แหล่งกำเนิดคลื่นที่ให้พลังงานเท่ากันทุกครั้ง</span></button></li>
+        <li><button type="button" class="g-item g-tall" data-full="assets/img/drop-tube-2.webp" data-w="900" data-h="1600"><img src="assets/img/drop-tube-2-sm.webp" width="450" height="800" loading="lazy" decoding="async" alt="ท่อนำแนวดิ่งวางบนจุดทดสอบ"><span class="g-cap"><span class="g-no">07</span>ท่อนำแนวดิ่งวางบนจุดทดสอบ</span></button></li>
+        <li><button type="button" class="g-item g-mid" data-full="assets/img/ui-idle.webp" data-w="954" data-h="1142"><img src="assets/img/ui-idle-sm.webp" width="668" height="800" loading="lazy" decoding="async" alt="หน้าจอระบบก่อนเริ่มรับเหตุการณ์"><span class="g-cap"><span class="g-no">08</span>หน้าจอระบบก่อนเริ่มรับเหตุการณ์</span></button></li>
+        <li><button type="button" class="g-item g-wide" data-full="assets/img/ui-debug.webp" data-w="1600" data-h="952"><img src="assets/img/ui-debug-sm.webp" width="800" height="476" loading="lazy" decoding="async" alt="โปรแกรมคำนวณตำแหน่งทำงานคู่กับหน้าจอสามมิติ"><span class="g-cap"><span class="g-no">09</span>โปรแกรมคำนวณตำแหน่งทำงานคู่กับหน้าจอสามมิติ</span></button></li>
+        <li><button type="button" class="g-item g-wide" data-full="assets/img/ui-3d-events.webp" data-w="877" data-h="655"><img src="assets/img/ui-3d-events-sm.webp" width="800" height="597" loading="lazy" decoding="async" alt="ภาพสามมิติ: แท่งคือตำแหน่งและระดับพลังงาน วงแหวนคือความน่าเชื่อถือ"><span class="g-cap"><span class="g-no">10</span>ภาพสามมิติ: แท่งคือตำแหน่งและระดับพลังงาน วงแหวนคือความน่าเชื่อถือ</span></button></li>
+        <li><button type="button" class="g-item g-wide" data-full="assets/img/ui-dashboard.webp" data-w="1600" data-h="866"><img src="assets/img/ui-dashboard-sm.webp" width="800" height="433" loading="lazy" decoding="async" alt="หน้าจอแสดงผลพร้อมประวัติเหตุการณ์"><span class="g-cap"><span class="g-no">11</span>หน้าจอแสดงผลพร้อมประวัติเหตุการณ์</span></button></li>
+        <li><button type="button" class="g-item g-mid" data-full="assets/img/gdop-map.webp" data-w="1600" data-h="1524"><img src="assets/img/gdop-map-sm.webp" width="800" height="762" loading="lazy" decoding="async" alt="แผนที่ความคลาดเคลื่อนของการระบุตำแหน่งจากการจำลอง (GDOP)"><span class="g-cap"><span class="g-no">12</span>แผนที่ความคลาดเคลื่อนของการระบุตำแหน่งจากการจำลอง (GDOP)</span></button></li>
+      </ul>
+    </div>
+    <div class="wrap"><div class="gal-progress" aria-hidden="true"><i id="galFill"></i></div></div>
+  </div>
+</section>
+
+<!-- 10 TEAM -->
+<section id="team" class="chapter" aria-labelledby="h-team" data-chapter="10" data-title="ผู้จัดทำ">
+  <div class="wrap">
+    <header class="chap">
+      <span class="chap-no" aria-hidden="true">10</span>
+      <p class="chap-en" lang="en">Team</p>
+      <h2 id="h-team" data-split>ผู้จัดทำ</h2>
+    </header>
+    <div class="team2">
+      <ul class="people">
+        <li class="tc" data-tilt data-reveal><span class="p-idx" aria-hidden="true">01</span><span class="p-name">นายภูริวัจน์เจริญ เจริญบันลือโชติ</span></li>
+        <li class="tc" data-tilt data-reveal><span class="p-idx" aria-hidden="true">02</span><span class="p-name">นายไอยคุปต์ ปิยะไทยเสรี</span></li>
+        <li class="tc" data-tilt data-reveal><span class="p-idx" aria-hidden="true">03</span><span class="p-name">นางสาววรรณกานต์ วัฒโนภาษ</span></li>
+      </ul>
+      <div class="team-school" data-reveal>
+        <div><p class="ts-name">โรงเรียนมัธยมวัดด่านสำโรง</p><p class="ts-sub">สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาสมุทรปราการ</p></div>
+        <p class="ts-proj">โครงงานวิทยาศาสตร์ ประเภทฟิสิกส์ · ปีการศึกษา 2569</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-mark" lang="en">Acoustic Emission<br>Source Localization</p>
+        <p class="foot-note">โครงงานวิทยาศาสตร์ ฟิสิกส์ · โรงเรียนมัธยมวัดด่านสำโรง · ปีการศึกษา 2569</p>
+        <a class="btn btn-ghost foot-top" href="#top" data-magnetic><span>กลับขึ้นด้านบน</span></a>
+      </div>
+      <div>
+        <h2 class="foot-h">เอกสารอ้างอิง</h2>
+        <ul class="refs">
+          <li>Han, L. et al. (2025). Research on acoustic emission source localization technology based on AI deep learning. QingCheng AE Institute.</li>
+          <li>Xargay, H., Vesga-Ramírez, A., Folino, P., &amp; Caggiano, A. (2025). Crack monitoring in concrete structures using acoustic emission and machine learning techniques. Mecánica Computacional, XLII, 1385–1394.</li>
+          <li>สโรชา ช่วงชู (2565) · ศุภณัฐ หวัง (2567) · STMicroelectronics RM0383 · Three.js documentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="ดูรูปขยาย">
+  <div class="lb-in">
+    <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="ปิด">ปิด</button>
+    <div class="lb-stage"><img id="lbImg" alt="" width="1600" height="900"></div>
+    <div class="lb-bar">
+      <button type="button" class="lb-btn" id="lbPrev" aria-label="รูปก่อนหน้า">ก่อนหน้า</button>
+      <p class="lb-cap" id="lbCap"></p>
+      <button type="button" class="lb-btn" id="lbNext" aria-label="รูปถัดไป">ถัดไป</button>
+    </div>
+    <p class="lb-count mono" id="lbCount" aria-live="polite"></p>
+  </div>
+</dialog>
+
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

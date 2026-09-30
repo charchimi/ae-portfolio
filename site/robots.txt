@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://charchimi.github.io/ae-portfolio/sitemap.xml
