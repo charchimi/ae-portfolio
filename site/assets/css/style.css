@@ -76,19 +76,19 @@ strong { font-weight: 500; color: var(--ink); }
 
 /* ---------- boot ---------- */
 .boot { position: fixed; inset: 0; z-index: 300; background: var(--void); display: grid; place-items: center; pointer-events: none;
-  animation: bootOut .45s var(--ease-io) 1.05s forwards; }
+  animation: bootOut .25s var(--ease-io) .5s forwards; }
 .no-boot .boot, html:not(.js) .boot { display: none; }
 .boot-in { width: min(560px, 82vw); }
 .boot-trace { width: 100%; height: 90px; overflow: visible; }
 .boot-trace path { fill: none; vector-effect: non-scaling-stroke; }
 .bt-base { stroke: rgba(170, 215, 230, .14); stroke-width: 1; }
 .bt-sig { stroke: var(--signal); stroke-width: 1.6; stroke-dasharray: 900; stroke-dashoffset: 900; filter: drop-shadow(0 0 6px rgba(var(--signal-rgb), .8));
-  animation: bootDraw .8s cubic-bezier(.5, 0, .3, 1) .08s forwards; }
+  animation: bootDraw .42s cubic-bezier(.5, 0, .3, 1) .02s forwards; }
 .boot-l { display: flex; justify-content: space-between; margin-top: 18px; font-family: var(--f-mono); font-size: var(--fs-0); color: var(--muted); letter-spacing: .08em; }
-.boot-l span { opacity: 0; animation: bootIn .3s ease forwards; }
-.boot-l span:nth-child(1) { animation-delay: .2s; color: var(--signal); }
-.boot-l span:nth-child(2) { animation-delay: .38s; }
-.boot-l span:nth-child(3) { animation-delay: .56s; }
+.boot-l span { opacity: 0; animation: bootIn .2s ease forwards; }
+.boot-l span:nth-child(1) { animation-delay: .05s; color: var(--signal); }
+.boot-l span:nth-child(2) { animation-delay: .15s; }
+.boot-l span:nth-child(3) { animation-delay: .25s; }
 .boot.is-skip { animation: bootOut .25s ease forwards; }
 @keyframes bootDraw { to { stroke-dashoffset: 0; } }
 @keyframes bootIn { to { opacity: 1; } }
@@ -217,9 +217,9 @@ strong { font-weight: 500; color: var(--ink); }
 .is-ready .hero .h-en .ln:nth-child(2) > span { transition-delay: .08s; }
 .is-ready .hero .h-en .ln:nth-child(3) > span { transition-delay: .16s; }
 .is-ready .hero .h-en .ln:nth-child(4) > span { transition-delay: .24s; }
-.is-ready .hero .h-th .ln > span, .is-ready .hero-eyebrow, .is-ready .hero-lead, .is-ready .hero-cta, .is-ready .stats { opacity: 1; transform: none; transition: opacity .9s ease .35s, transform .9s var(--ease) .35s; }
+.is-ready .hero .h-th .ln > span, .is-ready .hero-eyebrow, .is-ready .hero-lead, .is-ready .hero-cta, .is-ready .stats { opacity: 1; transform: none; transition: opacity .6s ease .05s, transform .7s var(--ease) .05s; }
 .js .hero .h-th .ln > span, .js .hero-lead, .js .hero-cta { transform: translateY(14px); }
-.is-ready .hero-lead { transition-delay: .45s; } .is-ready .hero-cta { transition-delay: .55s; } .is-ready .stats { transition-delay: .7s; }
+.is-ready .hero-lead { transition-delay: .08s; } .is-ready .hero-cta { transition-delay: .16s; } .is-ready .stats { transition-delay: .24s; }
 
 /* ---------- ticker ---------- */
 .ticker { position: relative; overflow: hidden; border-block: 1px solid var(--line); background: rgba(8, 14, 18, .7); padding: 14px 0; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
@@ -1402,3 +1402,11 @@ p, li, dd { text-wrap: pretty; }
 @media (max-width: 999px) { .menu-in { padding-top: 84px; } .menu-list a { min-height: 58px; } }
 @media (prefers-reduced-motion: reduce) { .mp { transform: none; } }
 @media (max-width: 640px) { .people .tc { gap: 14px; padding: 18px 22px 22px; } .people { gap: 10px; } }
+
+/* T12: pinned step text keeps >= 4.5:1 when inactive; state shown by accent rule + colour, not opacity */
+.how-step, .js .obj-step { opacity: 1; padding-left: 18px; border-left: 2px solid transparent; transition: border-color .5s; }
+.how-step h3, .obj-step strong { color: var(--faint); transition: color .5s; }
+.how-step p:last-child, .obj-step p { color: var(--faint); }
+.how-step.is-active, .js .obj-step.is-active { border-left-color: var(--signal); }
+.how-step.is-active h3, .obj-step.is-active strong { color: var(--ink); }
+.how-step.is-active p:last-child, .obj-step.is-active p { color: var(--muted); }

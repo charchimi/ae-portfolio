@@ -51,7 +51,7 @@ export function initUI(reduced, motion) {
     const el = document.createElement('div');
     el.className = 'mp';
     const no = $('.m-no', a).textContent.trim();
-    el.innerHTML = `<div class="mp-img"><span class="mp-no">${no || '▶'}</span><img src="assets/img/${IMG[id]}-sm.webp" alt="" loading="lazy" decoding="async"></div><div class="mp-body"><p class="mp-en"></p><h3 class="mp-t"></h3><p class="mp-p"></p></div>`;
+    el.innerHTML = `<div class="mp-img"><span class="mp-no">${no || '▶'}</span><img src="assets/img/${IMG[id]}-sm.webp" width="800" height="450" alt="" loading="lazy" decoding="async"></div><div class="mp-body"><p class="mp-en"></p><h3 class="mp-t"></h3><p class="mp-p"></p></div>`;
     $('.mp-en', el).textContent = en ? en.textContent : '';
     $('.mp-t', el).textContent = $('.m-t', a).textContent;
     $('.mp-p', el).textContent = tx ? tx.textContent.replace(/\s+/g, ' ').trim() : '';
